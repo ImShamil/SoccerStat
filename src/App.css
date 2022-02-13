@@ -1,7 +1,20 @@
 .App {
   text-align: center;
 }
-
+.competition{
+  border: 1px solid black
+}
+.competition p:first-child{
+  font-weight: bold;
+}
+.page-item{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+.page-number{
+  border: 1px solid black;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -15,9 +28,9 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height:auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
