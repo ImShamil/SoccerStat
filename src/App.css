@@ -12,6 +12,10 @@
   flex-direction: row;
   list-style-type: none;
 }
+.page-active{
+  background-color:blue;
+  border: 1px solid black;
+}
 .page-number{
   border: 1px solid black;
 }

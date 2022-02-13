@@ -26,11 +26,20 @@ function App() {
   const lastCompetitionPage=currentPage*competitionsPerPage;
   const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
   const currenCompetitionPage=competitions.slice(firstCompetitionPage,lastCompetitionPage)
-  
 
   const paginate=pageNumber=>setCurrentPage(pageNumber);
-  const nextPage=()=>setCurrentPage(prev=>prev+1);
-  const prevPage=()=>setCurrentPage(prev=>prev-1);
+  
+  function prevPage() {
+    setCurrentPage(pageNumber => pageNumber === 1 ? 1 : pageNumber - 1)
+}
+
+function nextPage() {
+  setCurrentPage(pageNumber =>
+      pageNumber === Math.ceil(data.count / competitionsPerPage) ?
+          pageNumber : pageNumber + 1)
+}
+console.log(currentPage)
+  
 
   // console.log(competitions);
   
@@ -59,6 +68,13 @@ function App() {
   
   return (
     <div className="App">
+      <header className='App-header'>
+        <ul>
+          <li><img alt='pic'></img></li>
+          <li>Лиги</li>
+          <li>Команды</li>
+        </ul>
+      </header>
 {/* //       <header className="App-header">
 //         <img alt="asdsd"></img>
 //         <div>
@@ -76,7 +92,7 @@ function App() {
         
 //       </div> */}
         <Competition competitions={currenCompetitionPage} loading={loading}/>
-        <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={data.count} paginate={paginate}/>
+        <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={data.count} paginate={paginate} currentPage={currentPage}/>
 
         <button  onClick={prevPage}>PrevPage</button>
         <button onClick={nextPage}>NextPage</button>
