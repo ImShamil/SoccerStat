@@ -1,21 +1,19 @@
 import React from 'react'
+import Searchbar from './Searchbar';
 
-const Competition = ({competitions,loading})=> {
-    if (loading){
-        return<h2>Loading...</h2>
-    }
+ function Competition({currentCompetitionPage}) {
 
-    return (
-        <a href='#'>
-            {
-                competitions.map((competition,i)=>(
-                    <div className='competition' key={i}>
+  return (
+    <div>
+         {
+                currentCompetitionPage.map((competition,i)=>(
+                    <button type="button" class="btn btn-secondary" key={i}>
                         <p>{competition.name}</p>
                         <p>{competition.area.name}</p>
-                    </div>   
+                    </button>   
                 ))
             }
-        </a>
-    )
+    </div>
+  )
 }
-export default Competition
+export default Competition;
