@@ -7,16 +7,16 @@ const Competitions = ()=> {
     const [data, setData]=useState([]);
     const [competitions,setCompetitions]=useState([]);
     const [loading ,setLoading]=useState(false);
-    const [currentPage, setCurrentPage]=useState(1);
-    const [competitionsPerPage]= useState(9);
+    // const [currentPage, setCurrentPage]=useState(1);
+    // const [competitionsPerPage]= useState(9);
 
-    const lastCompetitionPage=currentPage*competitionsPerPage;
-    const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
+    // const lastCompetitionPage=currentPage*competitionsPerPage;
+    // const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
 
-    const currentCompetitionPage=competitions.slice(firstCompetitionPage,lastCompetitionPage)
+    // const currentCompetitionPage=competitions.slice(firstCompetitionPage,lastCompetitionPage)
     
-    console.log(currentCompetitionPage);
-    const paginate=pageNumber=>setCurrentPage(pageNumber);
+    // const paginate=pageNumber=>setCurrentPage(pageNumber);
+   
 
     const getData= function(){
       setLoading(true);
@@ -25,11 +25,22 @@ const Competitions = ()=> {
       .then((response) =>{
         setData(response);
         setCompetitions(response.competitions)
+        
         setLoading(false);
       })
     }
     useEffect(getData,[]);
+
+    // const search=competition=>setCompetitions(competition)
+
+    const [value,setValue]=useState(' ');
     
+    const filterCompetition=competitions.map(competition=>{
+        if (competition.name.toLowerCase().includes(value.toLowerCase())) return competition
+        
+    })
+
+    console.log(filterCompetition)
     
     if (loading){
         return<h2>Loading...</h2>
@@ -37,9 +48,20 @@ const Competitions = ()=> {
 
     return (
         <div>
-         <Searchbar/>   
-        <Competition currentCompetitionPage={currentCompetitionPage}/>
-        <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={data.count} paginate={paginate} currentPage={currentPage}/>
+
+       <div>
+        <form class="d-flex">
+        <input class="form-control me-2" 
+        type="search" 
+        placeholder="Поиск" 
+        aria-label="Search" 
+        onChange={(event)=>setValue(event.target.value)}
+        />
+        <button class="btn btn-outline-success" type="submit">Поиск</button>
+        </form>
+        </div>
+        <Competition competitions={filterCompetition} data={data}/>
+        
         
         </div>
         

@@ -1,18 +1,18 @@
 import React, {useState } from 'react'
 
 
- function Searchbar() {
-    const [value,setValue]=useState(' ');
-
-    // const filtredCompetitions=competitions.map(competition=>{
-    //     if( competition.name.toLowerCase()===value.toLowerCase()){
-    //         return competitions.competition
-    //     }
-    //     return competitions
-    // })
-    // search(filtredCompetitions);
+ function Searchbar({competitions,search}) {
+    // const [value,setValue]=useState(' ');
     
+    const value='WC Qualification CAF';
 
+        const filtredCompetitions=competitions.map((competition)=>{
+        if( competition.name.toLowerCase()===value.toLowerCase()){
+            console.log(competition)
+        }
+    })
+    
+    
   return (
     <div>
         <form class="d-flex">
@@ -20,7 +20,7 @@ import React, {useState } from 'react'
         type="search" 
         placeholder="Поиск" 
         aria-label="Search" 
-        onChange={(event)=>setValue(event.target.value)}/>
+        />
         <button class="btn btn-outline-success" type="submit">Поиск</button>
         </form>
     </div>
