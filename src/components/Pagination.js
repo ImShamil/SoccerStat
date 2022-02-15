@@ -8,7 +8,8 @@ const Pagination = ({competitionsPerPage,totalCompetitions,paginate,currentPage}
     function prevPage() {
         paginate(pageNumber => pageNumber === 1 ? 1 : pageNumber - 1)
     }
-    
+    console.log(currentPage);
+    console.log(totalCompetitions);
     function nextPage() {
       paginate(pageNumber =>
           pageNumber === Math.ceil(totalCompetitions / competitionsPerPage) ?

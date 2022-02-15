@@ -1,18 +1,13 @@
-import React, {useState } from 'react'
+import React from 'react'
 
 
- function Searchbar({competitions,search}) {
-    // const [value,setValue]=useState(' ');
+ function Searchbar({setValue, setPage}) {
+  
+  function setNewValue(event){
+    setValue(event.target.value);
+    setPage(1);
     
-    const value='WC Qualification CAF';
-
-        const filtredCompetitions=competitions.map((competition)=>{
-        if( competition.name.toLowerCase()===value.toLowerCase()){
-            console.log(competition)
-        }
-    })
-    
-    
+  }
   return (
     <div>
         <form class="d-flex">
@@ -20,8 +15,8 @@ import React, {useState } from 'react'
         type="search" 
         placeholder="Поиск" 
         aria-label="Search" 
+        onChange={(event)=>setNewValue(event)}
         />
-        <button class="btn btn-outline-success" type="submit">Поиск</button>
         </form>
     </div>
   )

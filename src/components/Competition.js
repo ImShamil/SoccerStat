@@ -1,14 +1,14 @@
 import React,{useState} from 'react'
 import Pagination from './Pagination';
 
- function Competition({competitions,data}) {
-    const [currentPage, setCurrentPage]=useState(1);
+ function Competition({competitions,page}) {
+    const [currentPage, setCurrentPage]=useState(page);
     const [competitionsPerPage]= useState(9);
     const lastCompetitionPage=currentPage*competitionsPerPage;
     const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
     const paginate=pageNumber=>setCurrentPage(pageNumber);
-
-    const currentCompetitionPage=competitions.slice(firstCompetitionPage,lastCompetitionPage)
+    const currentCompetitionPage= (competitions.slice(firstCompetitionPage,lastCompetitionPage)).length==0? competitions:competitions.slice(firstCompetitionPage,lastCompetitionPage)
+    
   return (
     <div>
          {
@@ -19,7 +19,7 @@ import Pagination from './Pagination';
                     </button>   
                 ))
             }
-            <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={data.count} paginate={paginate} currentPage={currentPage}/>
+            <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={competitions.length} paginate={paginate} currentPage={currentPage}/>
     </div>
   )
 }
