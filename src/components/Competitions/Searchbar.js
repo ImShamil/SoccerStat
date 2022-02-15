@@ -1,12 +1,11 @@
 import React from 'react'
 
 
- function Searchbar({setValue, setPage}) {
-  
-  function setNewValue(event){
-    setValue(event.target.value);
-    setPage(1);
+  function Searchbar({setValue,setCurrentPage}) {
     
+  function handleOnchange(event){
+    setValue(event.target.value);
+    setCurrentPage(1);
   }
   return (
     <div>
@@ -15,7 +14,7 @@ import React from 'react'
         type="search" 
         placeholder="Поиск" 
         aria-label="Search" 
-        onChange={(event)=>setNewValue(event)}
+        onChange={(event)=>handleOnchange(event)}
         />
         </form>
     </div>

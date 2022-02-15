@@ -1,7 +1,7 @@
 
 import './App.css';
 //import React, { useEffect, useState } from 'react';
-import Competitions from './components/Competitions';
+import Competitions from './components/Competitions/Competitions';
 
 
 function App() {
