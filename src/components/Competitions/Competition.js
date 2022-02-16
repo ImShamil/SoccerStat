@@ -1,25 +1,17 @@
-import React,{useState} from 'react'
-import Pagination from './Pagination';
+import React from 'react'
+import CompetitionItem from './CompetitionItem';
 
- function Competition({competitions, currentPage,setCurrentPage}) {
-  
-  const [competitionsPerPage]= useState(9);
-  const lastCompetitionPage=currentPage*competitionsPerPage;
-  const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
-  const paginate=pageNumber=>setCurrentPage(pageNumber);
+
+ function Competition({competitions, firstCompetitionPage,lastCompetitionPage,competitionsPerPage}) {
   const currentCompetitionPage= (competitions.slice(firstCompetitionPage,lastCompetitionPage)).length===0? competitions.slice(0,competitionsPerPage):competitions.slice(firstCompetitionPage,lastCompetitionPage)
-  
   return (
     <div>
           {
             currentCompetitionPage.map((competition,i)=>(
-                <button type="button" class="btn btn-secondary" key={i}>
-                    <p>{competition.name}</p>
-                    <p>{competition.area.name}</p>
-                </button>   
+                <CompetitionItem competition={competition} key={i}/>
             ))
           }
-         <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={competitions.length} paginate={paginate} currentPage={currentPage}/>
+        
     </div>
   )
 }

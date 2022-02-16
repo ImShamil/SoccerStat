@@ -1,6 +1,7 @@
 import React,{ useEffect, useState }  from 'react';
 import Competition from './Competition';
 import Searchbar from './Searchbar'
+import Pagination from './Pagination';
 
 const Competitions = ()=> {
   const getData= function(){
@@ -24,6 +25,11 @@ const Competitions = ()=> {
       return competition.name.toLowerCase().includes(value.toLowerCase())
       
   })
+  const [competitionsPerPage]= useState(9);
+  const lastCompetitionPage=currentPage*competitionsPerPage;
+  const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
+  const paginate=pageNumber=>setCurrentPage(pageNumber);
+ 
 
   if (loading){
       return<h2>Loading...</h2>
@@ -32,7 +38,8 @@ const Competitions = ()=> {
   return (
       <div>
       <Searchbar setValue={setValue}setCurrentPage={setCurrentPage}/>
-      <Competition competitions={filterCompetition} currentPage={currentPage} setCurrentPage={setCurrentPage}   />
+      <Competition competitions={filterCompetition} firstCompetitionPage={firstCompetitionPage} lastCompetitionPage={lastCompetitionPage} competitionsPerPage={competitionsPerPage}/>
+      <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={filterCompetition.length} paginate={paginate} currentPage={currentPage}/>
       </div>
       
   )
