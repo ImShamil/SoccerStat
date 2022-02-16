@@ -3,6 +3,8 @@ import Competition from './Competition';
 import Searchbar from './Searchbar'
 import Pagination from './Pagination';
 
+
+
 const Competitions = ()=> {
   const getData= function(){
     setLoading(true);
@@ -30,7 +32,6 @@ const Competitions = ()=> {
   const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
   const paginate=pageNumber=>setCurrentPage(pageNumber);
  
-
   if (loading){
       return<h2>Loading...</h2>
   }
