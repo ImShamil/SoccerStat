@@ -16,11 +16,7 @@ import { useParams } from 'react-router-dom'
       setLoading(false);
     })
   }
-  useEffect(getData,[]);
-
- console.log(data)
-
-
+  useEffect(getData,[competition.id]);
   return (
     <p>{competition.id}</p>
   )

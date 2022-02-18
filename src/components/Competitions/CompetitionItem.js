@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
   return (
     
     <div> 
-        <Link to={`/${competition.id}`}>
+        <Link key={i} to={`/competitions/${competition.id}`}>
             <button type="button" class="btn btn-secondary" key={i}>
                 <p>{competition.name}</p>
                 <p>{competition.area.name}</p>

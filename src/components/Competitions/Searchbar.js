@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Form,FormControl} from 'react-bootstrap';
 
   function Searchbar({setValue,setCurrentPage}) {
     
@@ -8,16 +8,15 @@ import React from 'react'
     setCurrentPage(1);
   }
   return (
-    <div>
-        <form class="d-flex">
-        <input class="form-control me-2" 
-        type="search" 
-        placeholder="Поиск" 
-        aria-label="Search" 
-        onChange={(event)=>handleOnchange(event)}
+    <Form class="mb-3">
+        <FormControl
+          type="search"
+          placeholder="Поиск"
+          className="me-2"
+          aria-label="Search"
+          onChange={(event)=>handleOnchange(event)}
         />
-        </form>
-    </div>
+      </Form>
   )
 }
 export default Searchbar;

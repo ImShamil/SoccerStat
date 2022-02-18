@@ -1,7 +1,7 @@
 import React,{ useEffect, useState }  from 'react';
 import Competition from './Competition';
-import Searchbar from './Searchbar'
-import Pagination from './Pagination';
+import Searchbar from './Searchbar';
+import MyPagination from './MyPagination';
 
 
 
@@ -40,7 +40,7 @@ const Competitions = ()=> {
       <div>
       <Searchbar setValue={setValue}setCurrentPage={setCurrentPage}/>
       <Competition competitions={filterCompetition} firstCompetitionPage={firstCompetitionPage} lastCompetitionPage={lastCompetitionPage} competitionsPerPage={competitionsPerPage}/>
-      <Pagination competitionsPerPage={competitionsPerPage} totalCompetitions ={filterCompetition.length} paginate={paginate} currentPage={currentPage}/>
+      <MyPagination competitionsPerPage={competitionsPerPage} totalCompetitions ={filterCompetition.length}  currentPage={currentPage} paginate={paginate} />
       </div>
       
   )

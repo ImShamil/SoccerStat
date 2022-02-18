@@ -10,23 +10,22 @@ import {
 
 import Competitions from './components/Competitions/Competitions';
 import League from './components/League';
+import Layout from './components/Layout';
 
 
 function App() {
   
   return (
     <Router>
-      <div className="App">
-      <header className='App-header'>
-      <button><img alt='pic'></img></button>
-      <button><Link to="/Competitions/*"> Лиги </Link> </button>
-      <button><Link to="/Teams/"> Команды </Link> </button>
-      </header>
       <Routes>
-        <Route path="/Competitions/*" element={<Competitions/>}/>
-        <Route path=":id" element={<League/>}/>
+      <Route element={<Layout/>}>
+        <Route index element={<Competitions/>}/>
+        <Route path="competitions" element={<Competitions/>}/>
+        <Route path="competitions/:id" element={<League/>}/>
+        <Route path ="Teams" element={<h1>Teams</h1>}/>
+        <Route path = "*" element={<h1>Not foud</h1>}/>
+      </Route>
       </Routes>
-      </div>
     </Router>
     
   );
