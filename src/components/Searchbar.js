@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form,FormControl} from 'react-bootstrap';
 
-  function Searchbar({setValue,setCurrentPage}) {
+  function Searchbar({setFiltredList,setValue,setCurrentPage}) {
     
   function handleOnchange(event){
     setValue(event.target.value);
