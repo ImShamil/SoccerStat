@@ -1,9 +1,10 @@
 import React from 'react';
 import Pagination from 'react-bootstrap/Pagination'
 
-const MyPagination = ({competitionsPerPage,totalCompetitions,currentPage,paginate})=> {
+const MyPagination = ({perPage,total,currentPage,paginate})=> {
   
-  const totalPages=Math.ceil(totalCompetitions/competitionsPerPage)
+  let totalPages=Math.ceil(total/perPage);
+
   let isPageNumberOutOfRange;
 
   const pageNumbers = [...new Array(totalPages)].map((_, index) => {
@@ -109,7 +110,7 @@ const MyPagination = ({competitionsPerPage,totalCompetitions,currentPage,paginat
       {totalPages>0?<Pagination.Prev  onClick={()=>paginate(pageNumber => pageNumber === 1 ? 1 : pageNumber - 1)}/>:null}
       {pageNumbers}
       {totalPages>0?<Pagination.Next  onClick={()=>paginate(pageNumber =>
-    pageNumber === Math.ceil(totalCompetitions / competitionsPerPage) ?
+    pageNumber === Math.ceil(total / perPage) ?
         pageNumber : pageNumber + 1)}/>:null}
   </Pagination>
   )
