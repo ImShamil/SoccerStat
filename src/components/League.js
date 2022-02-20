@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { useParams,Link} from 'react-router-dom'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import MyTable from './MyTable'
 
  function League() {
 
@@ -20,18 +21,23 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
       setLoading(false);
     })
   }
-  console.log(competition.name)
+
   useEffect(getData,[competition.id]);
+
+  if (loading){
+    return<h2>Loading...</h2>
+}
   
-  // setNameLeague(data.competition)
-  //console.log(nameLeague)
   return (
+  <div>
     <Breadcrumb>
-     <Breadcrumb.Item  href="#"><Link to = "/competitions">Home</Link></Breadcrumb.Item>
-      <Breadcrumb.Item href="#">
-      {competition.name}
-      </Breadcrumb.Item>
-  </Breadcrumb>
+      <Breadcrumb.Item  href="#"><Link to = "/competitions">Home</Link></Breadcrumb.Item>
+      <Breadcrumb.Item href="#"><Link to = {`/competitions/${competition.id}`}>{competition.name}</Link></Breadcrumb.Item>
+    </Breadcrumb>
+
+    <h2>Матчи</h2>
+    <MyTable/>
+  </div>
   )
 }
 export default League
