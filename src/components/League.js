@@ -9,6 +9,7 @@ import MyTable from './MyTable'
 
   const [data, setData]=useState([]);
   const [competition,setCompetition]=useState([]);
+  const [matches,setMathces]=useState([])
   const [loading ,setLoading]=useState(false);
   const [err ,setErr]=useState(false);
 
@@ -17,11 +18,9 @@ import MyTable from './MyTable'
     fetch(`http://api.football-data.org/v2/competitions/${id.id}/matches`,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
     .then((response) => response.json())
     .then((response) =>{
-      
-      console.log(response)
       setData(response);
+     
       if('competition' in response){
-        console.log(response.competition)
         setCompetition(response.competition)
       }else setErr(true);
     })
@@ -35,8 +34,9 @@ import MyTable from './MyTable'
       setLoading(false);
     })
   }
-
+ 
   useEffect(()=>{getData()},[competition.id]);
+  useEffect(()=>{ setMathces(data.matches)},[competition.id]);
   if(err){
     return (<div>
             <h1>Error {data.errorCode}</h1>
@@ -46,7 +46,6 @@ import MyTable from './MyTable'
   if (loading){
     return<h2>Loading...</h2>
 }
-  
   return (
   <div>
     <Breadcrumb>
@@ -55,7 +54,7 @@ import MyTable from './MyTable'
     </Breadcrumb>
 
     <h2>Матчи</h2>
-    <MyTable/>
+    <MyTable matches={matches} />
   </div>
   )
 }
