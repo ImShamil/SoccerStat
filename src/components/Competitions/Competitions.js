@@ -17,20 +17,21 @@ const Competitions = ()=> {
     .then((response) =>{
       setData(response);
       setCompetitions(response.competitions)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+    .finally(()=>{
       setLoading(false);
     })
   }
-  useEffect(getData,[]);  
+  useEffect(()=>{getData()},[]);  
 
   const [data, setData]=useState([]);
   const [competitions,setCompetitions]=useState([]);
   const [loading ,setLoading]=useState(false);
   const [currentPage, setCurrentPage]=useState(1);
-  const [value,setValue]=useState('');
-
-  const filterCompetition=competitions.filter(competition=>{
-    return competition.name.toLowerCase().includes(value.toLowerCase())
-  });
+  const [filterList,setFilterList]=useState([]);
 
   const [competitionsPerPage]= useState(9);
   const lastCompetitionPage=currentPage*competitionsPerPage;
@@ -43,10 +44,10 @@ const Competitions = ()=> {
 
   return (
       <div>
-      <Searchbar setValue={setValue}setCurrentPage={setCurrentPage} value={value} />
+      <Searchbar competitions={competitions} setCurrentPage={setCurrentPage}setFilterList={setFilterList} />
       <MyButton competitions={competitions} AVAILABLE_ID={AVAILABLE_ID} setCompetitions={setCompetitions}/>
-      <Competition competitions={filterCompetition} firstCompetitionPage={firstCompetitionPage} lastCompetitionPage={lastCompetitionPage} competitionsPerPage={competitionsPerPage}/>
-      <MyPagination perPage={competitionsPerPage} total ={filterCompetition.length}  currentPage={currentPage} paginate={paginate} />
+      <Competition competitions={filterList} firstCompetitionPage={firstCompetitionPage} lastCompetitionPage={lastCompetitionPage} competitionsPerPage={competitionsPerPage}/>
+      <MyPagination perPage={competitionsPerPage} total ={filterList.length}  currentPage={currentPage} paginate={paginate} />
       </div>
       
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
-import Competition from './Competition';
+
 
  function MyButton({competitions,AVAILABLE_ID,setCompetitions}) {
     const showAvaliable=function(){
