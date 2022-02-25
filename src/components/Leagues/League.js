@@ -1,17 +1,17 @@
-import "react-datepicker/dist/react-datepicker.css";
+
 import React,{useState,useEffect} from 'react'
-import { useParams,Link} from 'react-router-dom'
-import Breadcrumb from 'react-bootstrap/Breadcrumb'
-import MyTable from './MyTable'
-import DatePicker from "react-datepicker";
-import { ru } from "date-fns/locale/";
+import { useParams} from 'react-router-dom'
+
+import MyTable from '../Leagues/MyTable'
+
 import { format } from 'date-fns'
-import MyPagination from "./MyPagination";
+import MyPagination from "../MyPagination";
+import MyBreadCrumb from "./MyBreadCrumb";
+import DateFilter from './DateFilter';
 
  function League() {
 
   let id=useParams();
-
   const [data, setData]=useState([]);
   const [competition,setCompetition]=useState([]);
   const [matches,setMatches]=useState([])
@@ -23,6 +23,7 @@ import MyPagination from "./MyPagination";
   const [currentPage, setCurrentPage]=useState(1);
   const lastCompetitionPage=currentPage*competitionsPerPage;
   const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
+  const currentCompetitionPage= (matches.slice(firstCompetitionPage,lastCompetitionPage)).length===0? matches.slice(0,competitionsPerPage):matches.slice(firstCompetitionPage,lastCompetitionPage)
 
 
   const getData= function(){
@@ -31,9 +32,9 @@ import MyPagination from "./MyPagination";
     .then((response) => response.json())
     .then((response) =>{
       setData(response);
-      if('competition' in response){
+      if('matches' in response){
         setCompetition(response.competition)
-        // setMatches(response.matches)
+        setMatches(response.matches)
       }else setErr(true);
     })
     .catch(error=>{
@@ -46,12 +47,12 @@ import MyPagination from "./MyPagination";
       setLoading(false);
     })
   }
- 
+ console.log(data.matches)
+
   useEffect(()=>{getData()},[competition.id,startDate,finishDate]);
-  useEffect(()=>{setMatches(data.matches)},[data]);
+
   const paginate=pageNumber=>setCurrentPage(pageNumber);
-  const currentCompetitionPage= (matches.slice(firstCompetitionPage,lastCompetitionPage)).length===0? matches.slice(0,competitionsPerPage):matches.slice(firstCompetitionPage,lastCompetitionPage)
- 
+
   if(err){
     return (<div>
             <h1>Error {data.errorCode}</h1>
@@ -63,14 +64,8 @@ import MyPagination from "./MyPagination";
 }
   return (
   <div>
-    <Breadcrumb>
-      <Breadcrumb.Item  href="#"><Link to = "/competitions">Home</Link></Breadcrumb.Item>
-      <Breadcrumb.Item href="#"><Link to = {`/competitions/${competition.id}`}>{competition.name}</Link></Breadcrumb.Item>
-    </Breadcrumb>
-    <div>
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} locale={ ru } dateFormat="P"/>
-      <DatePicker selected={finishDate} onChange={(date) => setFinishDate(date)} locale={ ru } dateFormat="P" />
-    </div>
+    <MyBreadCrumb id={competition.id} name={competition.name} />
+    <DateFilter startDate={startDate} finishDate={finishDate} setStartDate={setStartDate} setFinishDate={setFinishDate} setCurrentPage={setCurrentPage} />
     <h2>Матчи</h2>
     <MyTable matches={currentCompetitionPage} />
     <MyPagination perPage={competitionsPerPage}total={matches.length} currentPage={currentPage}paginate={paginate}/>
