@@ -1,9 +1,7 @@
 
 import React,{useState,useEffect} from 'react'
 import { useParams} from 'react-router-dom'
-
 import MyTable from '../Leagues/MyTable'
-
 import { format } from 'date-fns'
 import MyPagination from "../MyPagination";
 import MyBreadCrumb from "./MyBreadCrumb";
@@ -12,23 +10,27 @@ import DateFilter from './DateFilter';
  function League() {
 
   let id=useParams();
+  let URL='';
   const [data, setData]=useState([]);
   const [competition,setCompetition]=useState([]);
   const [matches,setMatches]=useState([])
   const [loading ,setLoading]=useState(false);
   const [err ,setErr]=useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [finishDate, setFinishDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [finishDate, setFinishDate] = useState(null);
   const [competitionsPerPage]= useState(7)
   const [currentPage, setCurrentPage]=useState(1);
   const lastCompetitionPage=currentPage*competitionsPerPage;
   const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
-  const currentCompetitionPage= (matches.slice(firstCompetitionPage,lastCompetitionPage)).length===0? matches.slice(0,competitionsPerPage):matches.slice(firstCompetitionPage,lastCompetitionPage)
-
+  const currentCompetitionPage= (matches.slice(firstCompetitionPage,lastCompetitionPage)).length===0? matches.slice(0,competitionsPerPage):matches.slice(firstCompetitionPage,lastCompetitionPage);
+  
+  if((startDate===null)||(finishDate===null)){
+    URL=`http://api.football-data.org/v2/competitions/${id.id}/matches`
+  }else URL=`http://api.football-data.org/v2/competitions/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`
 
   const getData= function(){
     setLoading(true);
-    fetch(`http://api.football-data.org/v2/competitions/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
+    fetch(URL,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
     .then((response) => response.json())
     .then((response) =>{
       setData(response);
@@ -47,9 +49,7 @@ import DateFilter from './DateFilter';
       setLoading(false);
     })
   }
- console.log(data.matches)
-
-  useEffect(()=>{getData()},[competition.id,startDate,finishDate]);
+  useEffect(()=>{getData()},[competition.id,(startDate && finishDate)]);
 
   const paginate=pageNumber=>setCurrentPage(pageNumber);
 
