@@ -13,7 +13,7 @@ import { addMonths } from 'date-fns'
             setFinishDate(null);
         }
         setStartDate(date);
-        
+        setCurrentPage(1);
     }
     function handleOnchangeFinish(date){
         if(date===null){
