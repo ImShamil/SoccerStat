@@ -6,6 +6,7 @@ import MyTable from './MyTable'
 import DatePicker from "react-datepicker";
 import { ru } from "date-fns/locale/";
 import { format } from 'date-fns'
+import MyPagination from "./MyPagination";
 
  function League() {
 
@@ -13,11 +14,16 @@ import { format } from 'date-fns'
 
   const [data, setData]=useState([]);
   const [competition,setCompetition]=useState([]);
-  const [matches,setMathces]=useState([])
+  const [matches,setMatches]=useState([])
   const [loading ,setLoading]=useState(false);
   const [err ,setErr]=useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [finishDate, setFinishDate] = useState(new Date());
+  const [competitionsPerPage]= useState(7)
+  const [currentPage, setCurrentPage]=useState(1);
+  const lastCompetitionPage=currentPage*competitionsPerPage;
+  const firstCompetitionPage=lastCompetitionPage-competitionsPerPage;
+
 
   const getData= function(){
     setLoading(true);
@@ -25,9 +31,9 @@ import { format } from 'date-fns'
     .then((response) => response.json())
     .then((response) =>{
       setData(response);
-     
       if('competition' in response){
         setCompetition(response.competition)
+        // setMatches(response.matches)
       }else setErr(true);
     })
     .catch(error=>{
@@ -42,7 +48,10 @@ import { format } from 'date-fns'
   }
  
   useEffect(()=>{getData()},[competition.id,startDate,finishDate]);
-  useEffect(()=>{ setMathces(data.matches)},[competition.id,startDate,finishDate]);
+  useEffect(()=>{setMatches(data.matches)},[data]);
+  const paginate=pageNumber=>setCurrentPage(pageNumber);
+  const currentCompetitionPage= (matches.slice(firstCompetitionPage,lastCompetitionPage)).length===0? matches.slice(0,competitionsPerPage):matches.slice(firstCompetitionPage,lastCompetitionPage)
+ 
   if(err){
     return (<div>
             <h1>Error {data.errorCode}</h1>
@@ -58,10 +67,13 @@ import { format } from 'date-fns'
       <Breadcrumb.Item  href="#"><Link to = "/competitions">Home</Link></Breadcrumb.Item>
       <Breadcrumb.Item href="#"><Link to = {`/competitions/${competition.id}`}>{competition.name}</Link></Breadcrumb.Item>
     </Breadcrumb>
-    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} locale={ ru } dateFormat="P"/>
-    <DatePicker selected={finishDate} onChange={(date) => setFinishDate(date)} locale={ ru } dateFormat="P" />
+    <div>
+      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} locale={ ru } dateFormat="P"/>
+      <DatePicker selected={finishDate} onChange={(date) => setFinishDate(date)} locale={ ru } dateFormat="P" />
+    </div>
     <h2>Матчи</h2>
-    <MyTable matches={matches} />
+    <MyTable matches={currentCompetitionPage} />
+    <MyPagination perPage={competitionsPerPage}total={matches.length} currentPage={currentPage}paginate={paginate}/>
   </div>
   )
 }
