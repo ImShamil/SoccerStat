@@ -1,7 +1,11 @@
+import "react-datepicker/dist/react-datepicker.css";
 import React,{useState,useEffect} from 'react'
 import { useParams,Link} from 'react-router-dom'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import MyTable from './MyTable'
+import DatePicker from "react-datepicker";
+import { ru } from "date-fns/locale/";
+import { format } from 'date-fns'
 
  function League() {
 
@@ -12,10 +16,12 @@ import MyTable from './MyTable'
   const [matches,setMathces]=useState([])
   const [loading ,setLoading]=useState(false);
   const [err ,setErr]=useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [finishDate, setFinishDate] = useState(new Date());
 
   const getData= function(){
     setLoading(true);
-    fetch(`http://api.football-data.org/v2/competitions/${id.id}/matches`,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
+    fetch(`http://api.football-data.org/v2/competitions/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
     .then((response) => response.json())
     .then((response) =>{
       setData(response);
@@ -35,8 +41,8 @@ import MyTable from './MyTable'
     })
   }
  
-  useEffect(()=>{getData()},[competition.id]);
-  useEffect(()=>{ setMathces(data.matches)},[competition.id]);
+  useEffect(()=>{getData()},[competition.id,startDate,finishDate]);
+  useEffect(()=>{ setMathces(data.matches)},[competition.id,startDate,finishDate]);
   if(err){
     return (<div>
             <h1>Error {data.errorCode}</h1>
@@ -52,7 +58,8 @@ import MyTable from './MyTable'
       <Breadcrumb.Item  href="#"><Link to = "/competitions">Home</Link></Breadcrumb.Item>
       <Breadcrumb.Item href="#"><Link to = {`/competitions/${competition.id}`}>{competition.name}</Link></Breadcrumb.Item>
     </Breadcrumb>
-
+    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} locale={ ru } dateFormat="P"/>
+    <DatePicker selected={finishDate} onChange={(date) => setFinishDate(date)} locale={ ru } dateFormat="P" />
     <h2>Матчи</h2>
     <MyTable matches={matches} />
   </div>

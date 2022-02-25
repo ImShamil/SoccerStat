@@ -1,7 +1,6 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
-import moment from 'moment'
-import 'moment/locale/ru'
+import { format } from 'date-fns'
 
  function MyTable ({matches}) {
 
@@ -46,8 +45,8 @@ import 'moment/locale/ru'
       <tbody>
     {matches.map((item,i)=>(
         <tr key={i}>
-          <td>{moment(item.utcDate).format("LL")}</td>
-          <td>{moment(item.utcDate).format('LT')}</td>
+          <td>{format(new Date(item.utcDate), 'dd.MM.yyyy')}</td>
+          <td>{format(new Date(item.utcDate),'HH:mm')}</td>
           <td> {getStatus(item.status)}</td>
           <td>{item.homeTeam.name}</td>
           <td>-</td>
