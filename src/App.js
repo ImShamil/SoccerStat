@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate
 } from "react-router-dom";
 
 import Page from './components/PageItems/Page';
@@ -17,7 +18,8 @@ function App() {
     <Router>
       <Routes>
       <Route element={<Layout/>}>
-        <Route index element={<Page path={"competitions"}/>}/>
+        {/* <Route index element={<Page path={"competitions"}/>}/> */}
+        <Route path="/" element={<Navigate to="competitions" />}/>
         <Route path="competitions" element={<Page path={"competitions"}/>}/>
         <Route path="competitions/:id" element={<ItemMatches path={"competitions"}/>}/>
         <Route path ="teams" element={<Page path={"teams"}/>}/>
