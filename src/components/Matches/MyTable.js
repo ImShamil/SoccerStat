@@ -2,7 +2,7 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 import { format } from 'date-fns'
 
- function MyTable ({matches}) {
+ function MyTable ({matches,count}) {
 
   const getStatus=(item)=>{
     let status='';
@@ -36,13 +36,13 @@ import { format } from 'date-fns'
         
     }
   }
-  if (matches.length===0){
+  if (count===0){
     return (<div>
       <p>В заданный период игры не проходят</p>
       <p>Выберите другой период</p>
     </div>)
   }
-  console.log(matches)
+  
   return (
     <div>
         <Table striped bordered hover>

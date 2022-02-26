@@ -6,8 +6,8 @@ import {
   Routes,
 } from "react-router-dom";
 
-import Competitions from './components/Competitions/Competitions';
-import League from './components/Leagues/League';
+import Page from './components/PageItems/Page';
+import ItemMatches from './components/Matches/ItemMatches';
 import Layout from './components/Layout';
 
 
@@ -17,10 +17,11 @@ function App() {
     <Router>
       <Routes>
       <Route element={<Layout/>}>
-        <Route index element={<Competitions/>}/>
-        <Route path="competitions" element={<Competitions/>}/>
-        <Route path="competitions/:id" element={<League/>}/>
-        <Route path ="Teams" element={<h1>Teams</h1>}/>
+        <Route index element={<Page/>}/>
+        <Route path="competitions" element={<Page path={"competitions"}/>}/>
+        <Route path="competitions/:id" element={<ItemMatches path={"competitions"}/>}/>
+        <Route path ="teams" element={<Page path={"teams"}/>}/>
+        <Route path="teams/:id" element={<ItemMatches path={"teams"}/>}/>
         <Route path = "*" element={<h1>Not foud</h1>}/>
       </Route>
       </Routes>

@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import { Form,FormControl} from 'react-bootstrap';
 
-  function Searchbar({competitions,setCurrentPage,setFilterList}) {
+  function Searchbar({data,setCurrentPage,setFilterList}) {
   const [value,setValue]=useState('');
 
-  const filterCompetition=competitions.filter(competition=>{
-    return competition.name.toLowerCase().includes(value.toLowerCase())
+  const filterCompetition=data.filter(index=>{
+    return index.name.toLowerCase().includes(value.toLowerCase())
   });
 
   function handleOnchange(event){
@@ -15,7 +15,7 @@ import { Form,FormControl} from 'react-bootstrap';
 
   useEffect(() => {
     setFilterList(filterCompetition);
-  }, [competitions,value]);
+  }, [data,value]);
   
   return (
     <Form class="mb-3">
