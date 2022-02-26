@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import MyPagination from "../Common/MyPagination";
 import MyBreadCrumb from "../Common/MyBreadCrumb";
 import DateFilter from '../Common/DateFilter';
+import Spinner from 'react-bootstrap/Spinner'
 
  function ItemMatches({path}) {
 
@@ -76,9 +77,7 @@ import DateFilter from '../Common/DateFilter';
 
   const currentMathesPage= (matches.slice(firstItemsPage,lastItemsPage)).length===0? matches.slice(0,itemsPerPage):matches.slice(firstItemsPage,lastItemsPage);
   const paginate=pageNumber=>setCurrentPage(pageNumber);
-  console.log(dataSecond)
-  // console.log(matches)
-  // console.log(currentMathesPage)
+  
 
   if(err){
     return (<div>
@@ -87,7 +86,11 @@ import DateFilter from '../Common/DateFilter';
     </div>)
   }
   if (loading||currentMathesPage.length===0 ){
-    return<h2>Loading...</h2>
+    return(
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+          )
 }
   return (
   <div>

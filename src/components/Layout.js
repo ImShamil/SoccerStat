@@ -1,13 +1,36 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-function Layout() {
+import Navbar from 'react-bootstrap/Navbar'
+import { Container,Nav } from "react-bootstrap";
+import logo from '../logo.svg'
 
+function Layout() {
     return (
         <div className="App">
-            <header className='App-header'>
-                <NavLink className={({ isActive }) => "navLink" + (isActive ? " active" : " inactive")} to="competitions">Лиги</NavLink>
-                <NavLink className={({ isActive }) => "navLink" + (isActive ? " active" : " inactive")} to="teams">Команды</NavLink>
-            </header>
+            
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand >
+                      <img
+                        src={logo}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                        alt="SoccerStatApp logo"
+                      />
+                    </Navbar.Brand>
+
+                    <Nav className="me-auto">
+                        <Nav.Link >
+                            <NavLink className={({ isActive }) => "navLink" + (isActive ? " active" : " inactive")} to="competitions">Лиги</NavLink>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <NavLink className={({ isActive }) => "navLink" + (isActive ? " active" : " inactive")} to="teams">Команды</NavLink>
+                        </Nav.Link>
+                    </Nav>
+              
+                </Container>
+            </Navbar>
             <main>
                 <Outlet />
             </main>

@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Routes>
       <Route element={<Layout/>}>
-        <Route index element={<Page/>}/>
+        <Route index element={<Page path={"competitions"}/>}/>
         <Route path="competitions" element={<Page path={"competitions"}/>}/>
         <Route path="competitions/:id" element={<ItemMatches path={"competitions"}/>}/>
         <Route path ="teams" element={<Page path={"teams"}/>}/>
