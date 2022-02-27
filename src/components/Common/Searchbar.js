@@ -18,7 +18,7 @@ import { Form,FormControl} from 'react-bootstrap';
   }, [data,value]);
   
   return (
-    <Form class="mb-3">
+    <Form className="d-flex">
         <FormControl
           type="search"
           placeholder="Поиск"

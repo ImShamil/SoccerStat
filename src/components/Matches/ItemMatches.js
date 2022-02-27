@@ -29,7 +29,7 @@ import Spinner from 'react-bootstrap/Spinner'
   URL_First=`http://api.football-data.org/v2/${path}/${id.id}`
   const getTeams=function(){
     setLoading(true);
-    fetch(URL_First,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
+    fetch(URL_First,{ headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN }})
     .then((response) => response.json())
     .then((response) =>{
       setDataFirst(response);

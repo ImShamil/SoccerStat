@@ -12,15 +12,17 @@ const Page = ({path})=> {
   
   const getData= function(){
     setLoading(true);
-    fetch(`http://api.football-data.org/v2/${path}`,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
+    fetch(`http://api.football-data.org/v2/${path}`,{ headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN }})
     .then((response) => response.json())
     .then((response) =>{
       setData(response);
+      console.log(data)
       if ('competitions' in response){
         setPage(response.competitions)
       }
-      if('teams' in response)
+      if('teams' in response){
         setPage(response.teams)
+      }
     })
     .catch(error=>{
       console.log(error)
@@ -37,7 +39,12 @@ const Page = ({path})=> {
   const [currentPage, setCurrentPage]=useState(1);
   const [filterList,setFilterList]=useState([]);
 
-  const [itemsPerPage]= useState(9);
+  let itemsPerPage;
+  if(path==='teams'){
+    itemsPerPage=10
+  }else itemsPerPage=9
+
+
   const lastItemsPage=currentPage*itemsPerPage;
   const firstItemsPage=lastItemsPage-itemsPerPage;
   const paginate=pageNumber=>setCurrentPage(pageNumber);

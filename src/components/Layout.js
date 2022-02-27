@@ -4,12 +4,12 @@ import Navbar from 'react-bootstrap/Navbar'
 import { Container,Nav } from "react-bootstrap";
 import logo from '../logo.svg'
 
+
 function Layout() {
     return (
         <div className="App">
-            
             <Navbar bg="light" expand="lg">
-                <Container>
+                <Container fluid="xxl">
                     <Navbar.Brand >
                       <img
                         src={logo}
@@ -21,7 +21,7 @@ function Layout() {
                     </Navbar.Brand>
 
                     <Nav className="me-auto">
-                        <Nav.Link  >
+                        <Nav.Link className="nav navbar-nav"  >
                             <NavLink  className={({ isActive }) => "navLink" + (isActive ? " active" : " inactive") } to="competitions">Лиги</NavLink>
                         </Nav.Link>
                         <Nav.Link>
@@ -31,9 +31,9 @@ function Layout() {
               
                 </Container>
             </Navbar>
-            <main>
+            <Container fluid="xxl">
                 <Outlet />
-            </main>
+            </Container>
         </div>
     );
 }
