@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import MyButton from './MyButton';
 
 
-const Page = ({path})=> {
+const Page = ({path,pageNumber})=> {
   const AVAILABLE_ID = ['2000','2001','2002','2003','2013','2014','2015','2016','2017','2018','2019','2021','2152' ];
   
   
@@ -36,9 +36,11 @@ const Page = ({path})=> {
   const [data, setData]=useState([]);
   const [page,setPage]=useState([]);
   const [loading ,setLoading]=useState(false);
-  const [currentPage, setCurrentPage]=useState(1);
+  const [currentPage, setCurrentPage]=useState(pageNumber);
   const [filterList,setFilterList]=useState([]);
 
+  useEffect(()=>{setCurrentPage(1)},[path]);
+  
   let itemsPerPage;
   if(path==='teams'){
     itemsPerPage=10
