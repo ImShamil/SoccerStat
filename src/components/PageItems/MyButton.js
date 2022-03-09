@@ -4,7 +4,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-function MyButton({ competitions, AVAILABLE_ID, setCompetitions }) {
+function MyButton({
+  competitions,
+  AVAILABLE_ID,
+  setCompetitions,
+}) {
   const showAvaliable = () => {
     const filterSet = new Set(AVAILABLE_ID);
     const avalilableList = competitions.filter(

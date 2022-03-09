@@ -6,14 +6,12 @@ import { format } from 'date-fns';
 import Spinner from 'react-bootstrap/Spinner';
 import MyTable from './MyTable';
 import MyPagination from '../Common/MyPagination';
-import MyBreadCrumb from '../Common/MyBreadCrumb';
+// import MyBreadCrumb from '../Common/MyBreadCrumb';
 import DateFilter from '../Common/DateFilter';
+import ErrorPage from '../Common/ErrorPage';
 
 function ItemMatches({ path }) {
   const id = useParams();
-
-  let URL = '';
-
   const [data, setData] = useState([]);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,46 +22,37 @@ function ItemMatches({ path }) {
   const [currentPage, setCurrentPage] = useState(1);
   const lastItemsPage = currentPage * itemsPerPage;
   const firstItemsPage = lastItemsPage - itemsPerPage;
+  let URL = `http://api.football-data.org/v2/${path}/${id.id}/matches`;
 
-  if ((!startDate) || (!finishDate)) {
-    URL = `http://api.football-data.org/v2/${path}/${id.id}/matches`;
-  } else URL = `http://api.football-data.org/v2/${path}/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`;
-
-  const getData = () => {
+  if ((startDate) || (finishDate)) {
+    URL = `http://api.football-data.org/v2/${path}/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`;
+  }
+  useEffect(() => {
     setLoading(true);
-    fetch(URL, { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } })
+    setErr(false);
+    fetch(
+      URL,
+      { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } },
+    )
       .then((response) => response.json())
       .then((response) => {
-        if ('matches' in response) {
-          setMatches(response.matches);
-        } else {
+        if (response.errorCode) {
           setErr(true);
           setData(response);
-        }
+        } else setMatches(response.matches);
       })
       .catch((error) => {
-        alert('Матчи недоступны');
-        if (error === 403) {
-          console.log(error);
-        }
+        console.log(error);
       })
       .finally(() => {
         setLoading(false);
       });
-  };
+  }, [startDate && finishDate]);
 
-  useEffect(() => { getData(); }, [id, (startDate && finishDate), path]);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  console.log(matches);
   if (err) {
     return (
-      <div>
-        <h1>
-          Error
-          {data.errorCode}
-        </h1>
-        <p>{data.message}</p>
-      </div>
+      <ErrorPage data={data} />
     );
   }
   if (loading) {
@@ -73,13 +62,14 @@ function ItemMatches({ path }) {
       </Spinner>
     );
   }
+
   return (
     <div>
-      <MyBreadCrumb
+      {/* <MyBreadCrumb
         id={id.id}
         path={path}
         setErr={setErr}
-      />
+      /> */}
       <DateFilter
         startDate={startDate}
         finishDate={finishDate}

@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 
-function Searchbar({ data, setCurrentPage, setFilterList }) {
+function Searchbar({
+  data,
+  setCurrentPage,
+  setFilterList,
+}) {
   const [value, setValue] = useState('');
 
   const filterCompetition = data.filter(

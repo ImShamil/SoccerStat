@@ -4,7 +4,10 @@ import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 
 function MyPagination({
-  perPage, total, currentPage, paginate,
+  perPage,
+  total,
+  currentPage,
+  paginate,
 }) {
   const totalPages = Math.ceil(total / perPage);
 

@@ -6,7 +6,11 @@ import Card from 'react-bootstrap/Card';
 import { Row, Col } from 'react-bootstrap';
 
 function PageItems({
-  page, firstItemsPage, lastItemsPage, itemsPerPage, path,
+  page,
+  firstItemsPage,
+  lastItemsPage,
+  itemsPerPage,
+  path,
 }) {
   let xs; let md;
   if (path === 'teams') {
@@ -17,7 +21,8 @@ function PageItems({
     md = 3;
   }
   const currentItemsPage = (page.slice(firstItemsPage, lastItemsPage)).length === 0
-    ? page.slice(0, itemsPerPage) : page.slice(firstItemsPage, lastItemsPage);
+    ? page.slice(0, itemsPerPage)
+    : page.slice(firstItemsPage, lastItemsPage);
   return (
 
     <Row xs={xs} md={md} className="g-4">

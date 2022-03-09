@@ -5,7 +5,11 @@ import Table from 'react-bootstrap/Table';
 import { format } from 'date-fns';
 
 function MyTable({
-  matches, count, firstItemsPage, lastItemsPage, itemsPerPage,
+  matches,
+  count,
+  firstItemsPage,
+  lastItemsPage,
+  itemsPerPage,
 }) {
   const currentMathesPage = (matches.slice(firstItemsPage, lastItemsPage)).length === 0
     ? matches.slice(0, itemsPerPage)

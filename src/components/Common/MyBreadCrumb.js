@@ -4,12 +4,19 @@ import React, { useState, useEffect } from 'react';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { Link } from 'react-router-dom';
 
-function MyBreadCrumb({ id, path, setErr }) {
+function MyBreadCrumb({
+  id,
+  path,
+  setErr,
+}) {
   const URL = `http://api.football-data.org/v2/${path}/${id}`;
   const [name, setName] = useState([]);
 
-  const getTeams = () => {
-    fetch(URL, { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } })
+  useEffect(() => {
+    fetch(
+      URL,
+      { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } },
+    )
       .then((response) => response.json())
       .then((response) => {
         if ('name' in response) {
@@ -17,14 +24,10 @@ function MyBreadCrumb({ id, path, setErr }) {
         } else setErr(true);
       })
       .catch((error) => {
-        alert('Матчи недоступны');
-        if (error === 403) {
-          console.log(error);
-        }
+        console.log(error);
       });
-  };
-  useEffect(() => { getTeams(); }, [id, path]);
-
+  }, [path || id]);
+  console.log(name);
   return (
     <Breadcrumb>
       <Breadcrumb.Item href="#">

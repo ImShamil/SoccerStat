@@ -7,7 +7,11 @@ import { ru } from 'date-fns/locale/';
 import { addMonths } from 'date-fns';
 
 function DateFilter({
-  startDate, finishDate, setStartDate, setFinishDate, setCurrentPage,
+  startDate,
+  finishDate,
+  setStartDate,
+  setFinishDate,
+  setCurrentPage,
 }) {
   function handleOnchangeStart(date) {
     if (!date) {
