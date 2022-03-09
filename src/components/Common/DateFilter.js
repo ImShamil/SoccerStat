@@ -8,7 +8,7 @@ import { addMonths } from 'date-fns'
  function DateFilter({startDate,finishDate,setStartDate,setFinishDate,setCurrentPage}) {
 
     function handleOnchangeStart(date){
-        if(date===null){
+        if(!date){
             setStartDate(null);
             setFinishDate(null);
         }
@@ -16,7 +16,7 @@ import { addMonths } from 'date-fns'
         setCurrentPage(1);
     }
     function handleOnchangeFinish(date){
-        if(date===null){
+        if(!date){
             setStartDate(null);
             setFinishDate(null);
         }
@@ -27,14 +27,14 @@ import { addMonths } from 'date-fns'
 
   return (
     <div style={{ display: 'flex' }}> 
-        C
+       
       <DatePicker
         selected={startDate} 
         onChange={(date) => handleOnchangeStart(date)} locale={ ru }
        dateFormat="P"
-       placeholderText="ДД.ММ.ГГГГ" 
+       placeholderText="с ДД.ММ.ГГГГ" 
        isClearable/>
-        По 
+        
       <DatePicker 
       selected={finishDate}
       onChange={(date) =>handleOnchangeFinish(date)} 
@@ -43,7 +43,7 @@ import { addMonths } from 'date-fns'
       minDate={startDate}
       maxDate={addMonths(new Date(), 12)}
       showDisabledMonthNavigation
-      placeholderText="ДД.ММ.ГГГГ"
+      placeholderText="по ДД.ММ.ГГГГ"
       isClearable
        />
     </div>

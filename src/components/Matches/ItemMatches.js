@@ -10,11 +10,10 @@ import Spinner from 'react-bootstrap/Spinner'
  function ItemMatches({path}) {
 
   let id=useParams();
-  let URL_First='';
-  let URL_Second='';
-  const [dataFirst, setDataFirst]=useState([]);
-  const [dataSecond,setDataSecond]=useState([]);
-  const [item,setItem]=useState([]);
+
+  let URL='';
+  
+  const [data,setData]=useState([]);
   const [matches,setMatches]=useState([])
   const [loading ,setLoading]=useState(false);
   const [err ,setErr]=useState(false);
@@ -26,41 +25,22 @@ import Spinner from 'react-bootstrap/Spinner'
   const firstItemsPage=lastItemsPage-itemsPerPage;
   
 
-  URL_First=`http://api.football-data.org/v2/${path}/${id.id}`
-  const getTeams=function(){
-    setLoading(true);
-    fetch(URL_First,{ headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN }})
-    .then((response) => response.json())
-    .then((response) =>{
-      setDataFirst(response);
-      if('name' in response){
-        setItem(response)
-      }else setErr(true);
-    })
-    .catch(error=>{
-      alert("Матчи недоступны")
-      if(error===403){
-        console.log(error)
-      }
-    })
-    .finally(()=>{
-      setLoading(false);
-    })
-  }
-
-  if((startDate===null)||(finishDate===null)){
-    URL_Second=`http://api.football-data.org/v2/${path}/${id.id}/matches`
-  }else URL_Second=`http://api.football-data.org/v2/${path}/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`
+  if((!startDate)||(!finishDate)){
+    URL=`http://api.football-data.org/v2/${path}/${id.id}/matches`
+  }else URL=`http://api.football-data.org/v2/${path}/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`
 
   const getData= function(){
     setLoading(true);
-    fetch(URL_Second,{ headers: { 'X-Auth-Token': 'a225ca7a0b074a6da24c00593375f51e' }})
+    fetch(URL,{ headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN }})
     .then((response) => response.json())
     .then((response) =>{
-      setDataSecond(response);
+      
       if('matches' in response){
         setMatches(response.matches)
-      }else setErr(true);
+        
+      }else {
+        setErr(true);
+        setData(response);}
     })
     .catch(error=>{
       alert("Матчи недоступны")
@@ -72,20 +52,17 @@ import Spinner from 'react-bootstrap/Spinner'
       setLoading(false);
     })
   }
-  useEffect(()=>{getTeams()},[id,path]);
-  useEffect(()=>{getData()},[id,(startDate && finishDate),path]);
-
-  const currentMathesPage= (matches.slice(firstItemsPage,lastItemsPage)).length===0? matches.slice(0,itemsPerPage):matches.slice(firstItemsPage,lastItemsPage);
-  const paginate=pageNumber=>setCurrentPage(pageNumber);
   
-
+  useEffect(()=>{getData()},[id,(startDate && finishDate),path]);
+  const paginate=pageNumber=>setCurrentPage(pageNumber);
+  console.log(matches)
   if(err){
     return (<div>
-            <h1>Error {dataFirst.errorCode}</h1>
-            <p>{dataFirst.message}</p>
+            <h1>Error {data.errorCode}</h1>
+            <p>{data.message}</p>
     </div>)
   }
-  if (loading||currentMathesPage.length===0 ){
+  if (loading){
     return(
       <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -94,11 +71,11 @@ import Spinner from 'react-bootstrap/Spinner'
 }
   return (
   <div>
-    <MyBreadCrumb id={item.id} name={item.name} path={path} />
+    <MyBreadCrumb id={id.id} path={path} setErr={setErr}  />
     <DateFilter startDate={startDate} finishDate={finishDate} setStartDate={setStartDate} setFinishDate={setFinishDate} setCurrentPage={setCurrentPage} />
     <h2>Матчи</h2>
-    <MyTable matches={currentMathesPage} count={dataSecond.count} />
-    <MyPagination perPage={itemsPerPage}total={dataSecond.count} currentPage={currentPage}paginate={paginate}/>
+    <MyTable matches={matches} count={matches.length} firstItemsPage={firstItemsPage} lastItemsPage={lastItemsPage} itemsPerPage={itemsPerPage}/>
+    <MyPagination perPage={itemsPerPage} total={matches.length} currentPage={currentPage} paginate={paginate}/>
   </div>
   )
 }

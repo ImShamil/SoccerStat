@@ -2,8 +2,8 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 import { format } from 'date-fns'
 
- function MyTable ({matches,count}) {
-
+ function MyTable ({matches,count,firstItemsPage,lastItemsPage,itemsPerPage}) {
+  const currentMathesPage= (matches.slice(firstItemsPage,lastItemsPage)).length===0? matches.slice(0,itemsPerPage):matches.slice(firstItemsPage,lastItemsPage);
   const getStatus=(item)=>{
     let status='';
     switch(item){
@@ -36,7 +36,7 @@ import { format } from 'date-fns'
         
     }
   }
-  if (count===0){
+  if (!count){
     return (<div>
       <p>В заданный период игры не проходят</p>
       <p>Выберите другой период</p>
@@ -47,7 +47,7 @@ import { format } from 'date-fns'
     <div>
         <Table striped bordered hover>
       <tbody>
-    {matches.map((item,i)=>(
+    {currentMathesPage.map((item,i)=>(
         <tr key={i}>
           <td>{format(new Date(item.utcDate), 'dd.MM.yyyy')}</td>
           <td>{format(new Date(item.utcDate),'HH:mm')}</td>
