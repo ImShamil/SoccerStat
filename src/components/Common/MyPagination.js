@@ -1,36 +1,40 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import Pagination from 'react-bootstrap/Pagination'
+import Pagination from 'react-bootstrap/Pagination';
 
-const MyPagination = ({perPage,total,currentPage,paginate})=> {
-  
-  let totalPages=Math.ceil(total/perPage);
+function MyPagination({
+  perPage, total, currentPage, paginate,
+}) {
+  const totalPages = Math.ceil(total / perPage);
 
   let isPageNumberOutOfRange;
 
   const pageNumbers = [...new Array(totalPages)].map((_, index) => {
-    const pageNumber = index+1;
-    
-    if(totalPages>7){
-      //Номер текущей страницы
+    const pageNumber = index + 1;
+
+    if (totalPages > 7) {
+      // Номер текущей страницы
       const isPageNumberFirst = pageNumber === 1;
       const isPageNumberLast = pageNumber === totalPages;
-      const isCurrentPageFirst=currentPage===1;
-      const isCurrentPageLast=currentPage===totalPages;
-      const isCurrentPageSecond=(currentPage===2);
-      const isCurrentPagePreLast=(currentPage===totalPages-1);
-      const isCurrentPageBetweenLeft=((currentPage>1)&&(currentPage<4));
-      const isCurrentPageBetweenRight=((currentPage>totalPages-3)&&(currentPage<=totalPages));
-      const isCurrentPageMiddle=((currentPage>=4)&&(currentPage<=totalPages-3));
+      const isCurrentPageFirst = currentPage === 1;
+      const isCurrentPageLast = currentPage === totalPages;
+      const isCurrentPageSecond = (currentPage === 2);
+      const isCurrentPagePreLast = (currentPage === totalPages - 1);
+      const isCurrentPageBetweenLeft = ((currentPage > 1) && (currentPage < 4));
+      const isCurrentPageBetweenRight = ((currentPage > totalPages - 3)
+      && (currentPage <= totalPages));
+      const isCurrentPageMiddle = ((currentPage >= 4) && (currentPage <= totalPages - 3));
 
-
-      //Отображение номеров страниц в зависимости от положения текущей страницы
+      // Отображение номеров страниц в зависимости от положения текущей страницы
       const isCurrentPageFirstLast = Math.abs(pageNumber - currentPage) <= 4;
       const isCurrentPageBetween = Math.abs(pageNumber - currentPage) <= 2;
       const isCurrentPageSecondPreLast = Math.abs(pageNumber - currentPage) <= 3;
       const isCurrentPageMiddlePos = Math.abs(pageNumber - currentPage) <= 1;
-    
+
       if (
-      ((isCurrentPageFirst || isCurrentPageLast) && isCurrentPageFirstLast) || (isPageNumberFirst||isPageNumberLast)
+        ((isCurrentPageFirst || isCurrentPageLast) && isCurrentPageFirstLast)
+        || (isPageNumberFirst || isPageNumberLast)
       ) {
         isPageNumberOutOfRange = false;
         return (
@@ -44,21 +48,21 @@ const MyPagination = ({perPage,total,currentPage,paginate})=> {
         );
       }
       if (
-        (isCurrentPageSecond||isCurrentPagePreLast) && isCurrentPageSecondPreLast
-        ) {
-          isPageNumberOutOfRange = false;
-          return (
-            <Pagination.Item
-              key={pageNumber}
-              onClick={() => paginate(pageNumber)}
-              active={pageNumber === currentPage}
-            >
-              {pageNumber}
-            </Pagination.Item>
-          );
-        }
+        (isCurrentPageSecond || isCurrentPagePreLast) && isCurrentPageSecondPreLast
+      ) {
+        isPageNumberOutOfRange = false;
+        return (
+          <Pagination.Item
+            key={pageNumber}
+            onClick={() => paginate(pageNumber)}
+            active={pageNumber === currentPage}
+          >
+            {pageNumber}
+          </Pagination.Item>
+        );
+      }
       if (
-      (isCurrentPageBetweenLeft||isCurrentPageBetweenRight) && isCurrentPageBetween
+        (isCurrentPageBetweenLeft || isCurrentPageBetweenRight) && isCurrentPageBetween
       ) {
         isPageNumberOutOfRange = false;
         return (
@@ -90,7 +94,7 @@ const MyPagination = ({perPage,total,currentPage,paginate})=> {
         isPageNumberOutOfRange = true;
         return <Pagination.Ellipsis key={pageNumber} className="muted" />;
       }
-    }else{
+    } else {
       return (
         <Pagination.Item
           key={pageNumber}
@@ -101,18 +105,30 @@ const MyPagination = ({perPage,total,currentPage,paginate})=> {
         </Pagination.Item>
       );
     }
-    
+
     return null;
   });
-  
-  return(
-  <Pagination className="pagination justify-content-center"> 
-      {totalPages>0?<Pagination.Prev  onClick={()=>paginate(pageNumber => pageNumber === 1 ? 1 : pageNumber - 1)}/>:null}
+
+  return (
+    <Pagination className="pagination justify-content-center">
+      {totalPages > 0
+        ? (
+          <Pagination.Prev onClick={
+            () => paginate((pageNumber) => (pageNumber === 1 ? 1 : pageNumber - 1))
+          }
+          />
+        )
+        : null}
       {pageNumbers}
-      {totalPages>0?<Pagination.Next  onClick={()=>paginate(pageNumber =>
-    pageNumber === Math.ceil(total / perPage) ?
-        pageNumber : pageNumber + 1)}/>:null}
-  </Pagination>
-  )
+      {totalPages > 0
+        ? (
+          <Pagination.Next onClick={
+          () => paginate((pageNumber) => (pageNumber === Math.ceil(total / perPage)
+            ? pageNumber : pageNumber + 1))
+}
+          />
+        ) : null}
+    </Pagination>
+  );
 }
 export default MyPagination;
