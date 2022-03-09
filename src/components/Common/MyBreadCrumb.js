@@ -8,7 +8,7 @@ function MyBreadCrumb({ id, path, setErr }) {
   const URL = `http://api.football-data.org/v2/${path}/${id}`;
   const [name, setName] = useState([]);
 
-  const getTeams = function () {
+  const getTeams = () => {
     fetch(URL, { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } })
       .then((response) => response.json())
       .then((response) => {
@@ -27,8 +27,16 @@ function MyBreadCrumb({ id, path, setErr }) {
 
   return (
     <Breadcrumb>
-      <Breadcrumb.Item href="#"><Link to={`/${path}`}>Home</Link></Breadcrumb.Item>
-      <Breadcrumb.Item href="#"><Link to={`/${path}/${id}`}>{name.name}</Link></Breadcrumb.Item>
+      <Breadcrumb.Item href="#">
+        <Link to={`/${path}`}>
+          Home
+        </Link>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item href="#">
+        <Link to={`/${path}/${id}`}>
+          {name.name}
+        </Link>
+      </Breadcrumb.Item>
     </Breadcrumb>
   );
 }

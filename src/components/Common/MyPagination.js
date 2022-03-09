@@ -114,7 +114,9 @@ function MyPagination({
       {totalPages > 0
         ? (
           <Pagination.Prev onClick={
-            () => paginate((pageNumber) => (pageNumber === 1 ? 1 : pageNumber - 1))
+            () => paginate((pageNumber) => (pageNumber === 1
+              ? 1
+              : pageNumber - 1))
           }
           />
         )
@@ -124,7 +126,8 @@ function MyPagination({
         ? (
           <Pagination.Next onClick={
           () => paginate((pageNumber) => (pageNumber === Math.ceil(total / perPage)
-            ? pageNumber : pageNumber + 1))
+            ? pageNumber
+            : pageNumber + 1))
 }
           />
         ) : null}

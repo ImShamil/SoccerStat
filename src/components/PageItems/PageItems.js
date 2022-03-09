@@ -28,7 +28,9 @@ function PageItems({
             <Link to={`/${path}/${item.id}`}>
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
-                {path === 'teams' ? <Card.Img variant="bottom" src={item.crestUrl} height="100px" /> : <Card.Text>{item.area.name}</Card.Text>}
+                {path === 'teams'
+                  ? <Card.Img variant="bottom" src={item.crestUrl} height="100px" />
+                  : <Card.Text>{item.area.name}</Card.Text>}
               </Card.Body>
             </Link>
           </Card>

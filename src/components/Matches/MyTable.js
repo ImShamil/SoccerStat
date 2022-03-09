@@ -8,7 +8,8 @@ function MyTable({
   matches, count, firstItemsPage, lastItemsPage, itemsPerPage,
 }) {
   const currentMathesPage = (matches.slice(firstItemsPage, lastItemsPage)).length === 0
-    ? matches.slice(0, itemsPerPage) : matches.slice(firstItemsPage, lastItemsPage);
+    ? matches.slice(0, itemsPerPage)
+    : matches.slice(firstItemsPage, lastItemsPage);
 
   const getStatus = (item) => {
     let status;

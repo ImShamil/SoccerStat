@@ -15,7 +15,7 @@ function Page({ path }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterList, setFilterList] = useState([]);
 
-  const getData = function () {
+  const getData = () => {
     setLoading(true);
     fetch(`http://api.football-data.org/v2/${path}`, { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } })
       .then((response) => response.json())
@@ -59,8 +59,20 @@ function Page({ path }) {
 
   return (
     <div>
-      <Searchbar data={page} setCurrentPage={setCurrentPage} setFilterList={setFilterList} />
-      {path === 'competitions' ? <MyButton competitions={page} AVAILABLE_ID={AVAILABLE_ID} setCompetitions={setPage} /> : null}
+      <Searchbar
+        data={page}
+        setCurrentPage={setCurrentPage}
+        setFilterList={setFilterList}
+      />
+      {path === 'competitions'
+        ? (
+          <MyButton
+            competitions={page}
+            AVAILABLE_ID={AVAILABLE_ID}
+            setCompetitions={setPage}
+          />
+        )
+        : null}
       <PageItems
         page={filterList}
         firstItemsPage={firstItemsPage}

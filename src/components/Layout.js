@@ -22,10 +22,24 @@ function Layout() {
 
           <Nav className="me-auto">
             <Nav.Link className="nav navbar-nav">
-              <NavLink className={({ isActive }) => `navLink${isActive ? ' active' : ' inactive'}`} to="competitions">Лиги</NavLink>
+              <NavLink
+                className={({ isActive }) => `navLink${isActive
+                  ? ' active'
+                  : ' inactive'}`}
+                to="competitions"
+              >
+                Лиги
+              </NavLink>
             </Nav.Link>
             <Nav.Link>
-              <NavLink className={({ isActive }) => `navLink${isActive ? ' active' : ' inactive'}`} to="teams">Команды</NavLink>
+              <NavLink
+                className={({ isActive }) => `navLink${isActive
+                  ? ' active'
+                  : ' inactive'}`}
+                to="teams"
+              >
+                Команды
+              </NavLink>
             </Nav.Link>
           </Nav>
 

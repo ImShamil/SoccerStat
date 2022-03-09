@@ -5,7 +5,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 function MyButton({ competitions, AVAILABLE_ID, setCompetitions }) {
-  const showAvaliable = function () {
+  const showAvaliable = () => {
     const filterSet = new Set(AVAILABLE_ID);
     const avalilableList = competitions.filter(
       (competition) => (filterSet.has(competition.id.toString())),
@@ -14,7 +14,9 @@ function MyButton({ competitions, AVAILABLE_ID, setCompetitions }) {
   };
 
   return (
-    <Button onClick={showAvaliable}> Показать доступные лиги </Button>
+    <Button onClick={showAvaliable}>
+      Показать доступные лиги
+    </Button>
   );
 }
 export default MyButton;

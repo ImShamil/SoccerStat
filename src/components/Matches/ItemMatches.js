@@ -29,7 +29,7 @@ function ItemMatches({ path }) {
     URL = `http://api.football-data.org/v2/${path}/${id.id}/matches`;
   } else URL = `http://api.football-data.org/v2/${path}/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`;
 
-  const getData = function () {
+  const getData = () => {
     setLoading(true);
     fetch(URL, { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } })
       .then((response) => response.json())
@@ -75,7 +75,11 @@ function ItemMatches({ path }) {
   }
   return (
     <div>
-      <MyBreadCrumb id={id.id} path={path} setErr={setErr} />
+      <MyBreadCrumb
+        id={id.id}
+        path={path}
+        setErr={setErr}
+      />
       <DateFilter
         startDate={startDate}
         finishDate={finishDate}
