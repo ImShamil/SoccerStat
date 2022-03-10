@@ -11,6 +11,7 @@ import {
 import Page from './components/PageItems/Page';
 import ItemMatches from './components/Matches/ItemMatches';
 import Layout from './components/Layout';
+import OoopsPage from './components/Info_pages/OoopsPage';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="competitions/:id" element={<ItemMatches path="competitions" />} />
           <Route path="teams" element={<Page path="teams" />} />
           <Route path="teams/:id" element={<ItemMatches path="teams" />} />
-          <Route path="*" element={<h1>Not foud</h1>} />
+          <Route path="*" element={<OoopsPage />} />
         </Route>
       </Routes>
     </Router>

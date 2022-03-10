@@ -15,11 +15,11 @@ function PageItems({
   let xs; let md;
 
   if (path === 'teams') {
-    xs = 2;
-    md = 5;
+    xs = 2; // number of colums for <576px
+    md = 5; // number of colums for ≥768px
   } else {
-    xs = 3;
-    md = 3;
+    xs = 3; // the same for competitions page
+    md = 3; // the same for competitions page
   }
   const currentItemsPage = (page.slice(firstItemsPage, lastItemsPage)).length === 0
     ? page.slice(0, itemsPerPage)

@@ -6,7 +6,9 @@ import PageItems from './PageItems';
 import Searchbar from '../Common/Searchbar';
 import MyPagination from '../Common/MyPagination';
 import MyButton from './MyButton';
-import ErrorPage from '../Common/ErrorPage';
+import ErrorPage from '../Info_pages/ErrorPage';
+import getPageList from '../../api/getPageList';
+import OoopsPage from '../Info_pages/OoopsPage';
 
 function Page({ path }) {
   const AVAILABLE_ID = [
@@ -23,41 +25,21 @@ function Page({ path }) {
     '2019',
     '2021',
     '2152'];
-  const URL = `http://api.football-data.org/v2/${path}`;
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const [filterList, setFilterList] = useState([]);
   const [err, setErr] = useState(false);
   let itemsPerPage;
 
   useEffect(() => {
-    setLoading(true);
-    setErr(false);
-    fetch(
-      URL,
-      { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } },
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.errorCode) {
-          setErr(true);
-          setData(response);
-        } else {
-          if ('competitions' in response) {
-            setData(response.competitions);
-          }
-          if ('teams' in response) {
-            setData(response.teams);
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    getPageList(
+      path,
+      setLoading,
+      setErr,
+      setData,
+    );
   }, [path]);
 
   useEffect(() => { setCurrentPage(1); }, [path]);
@@ -85,6 +67,7 @@ function Page({ path }) {
       </Spinner>
     );
   }
+  console.log(filterList.length);
 
   return (
     <div>
@@ -102,13 +85,17 @@ function Page({ path }) {
           />
         )
         : null}
-      <PageItems
-        page={filterList}
-        firstItemsPage={firstItemsPage}
-        lastItemsPage={lastItemsPage}
-        itemsPerPage={itemsPerPage}
-        path={path}
-      />
+      {!filterList.length
+        ? <OoopsPage /> : (
+          <PageItems
+            page={filterList}
+            firstItemsPage={firstItemsPage}
+            lastItemsPage={lastItemsPage}
+            itemsPerPage={itemsPerPage}
+            path={path}
+          />
+        )}
+
       <MyPagination
         perPage={itemsPerPage}
         total={filterList.length}

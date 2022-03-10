@@ -3,6 +3,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { format } from 'date-fns';
+import MatchesNotFound from '../Info_pages/MatchesNotFound';
 
 function MyTable({
   matches,
@@ -50,15 +51,13 @@ function MyTable({
   };
   if (!count) {
     return (
-      <div>
-        <p>В заданный период игры не проходят</p>
-        <p>Выберите другой период</p>
-      </div>
+      <MatchesNotFound />
     );
   }
 
   return (
     <div>
+      <h2>Матчи</h2>
       <Table striped bordered hover>
         <tbody>
           {currentMathesPage.map((item) => (

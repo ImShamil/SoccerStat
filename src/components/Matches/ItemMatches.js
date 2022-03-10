@@ -2,13 +2,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
 import Spinner from 'react-bootstrap/Spinner';
 import MyTable from './MyTable';
 import MyPagination from '../Common/MyPagination';
 import MyBreadCrumb from '../Common/MyBreadCrumb';
 import DateFilter from '../Common/DateFilter';
-import ErrorPage from '../Common/ErrorPage';
+import ErrorPage from '../Info_pages/ErrorPage';
+import getPageData from '../../api/getMatchesList';
 
 function ItemMatches({ path }) {
   const id = useParams();
@@ -24,37 +24,21 @@ function ItemMatches({ path }) {
   const [name, setName] = useState('');
   const lastItemsPage = currentPage * itemsPerPage;
   const firstItemsPage = lastItemsPage - itemsPerPage;
-  let URL = `http://api.football-data.org/v2/${path}/${id.id}/matches`;
 
-  if ((startDate) || (finishDate)) {
-    URL = `http://api.football-data.org/v2/${path}/${id.id}/matches?dateFrom=${format(new Date(startDate), 'yyyy-MM-dd')}&dateTo=${format(new Date(finishDate), 'yyyy-MM-dd')}`;
-  }
   useEffect(() => {
-    setLoading(true);
-    setErr(false);
-    fetch(
-      URL,
-      { headers: { 'X-Auth-Token': process.env.REACT_APP_USER_TOKEN } },
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.errorCode) {
-          setErr(true);
-          setData(response);
-          console.log(response);
-        } else setMatches(response.matches);
-        if (path === 'competitions') {
-          setName(response.competition.name);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    getPageData(
+      path,
+      id,
+      startDate,
+      finishDate,
+      setLoading,
+      setErr,
+      setData,
+      setMatches,
+      setName,
+    );
   }, [startDate && finishDate]);
-  console.log(name);
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   if (err) {
     return (
@@ -83,7 +67,6 @@ function ItemMatches({ path }) {
         setFinishDate={setFinishDate}
         setCurrentPage={setCurrentPage}
       />
-      <h2>Матчи</h2>
       <MyTable
         matches={matches}
         count={matches.length}
