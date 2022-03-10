@@ -1,17 +1,18 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import Spinner from 'react-bootstrap/Spinner';
 import MyTable from './MyTable';
 import MyPagination from '../Common/MyPagination';
-// import MyBreadCrumb from '../Common/MyBreadCrumb';
+import MyBreadCrumb from '../Common/MyBreadCrumb';
 import DateFilter from '../Common/DateFilter';
 import ErrorPage from '../Common/ErrorPage';
 
 function ItemMatches({ path }) {
   const id = useParams();
+  const search = useLocation();
   const [data, setData] = useState([]);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ function ItemMatches({ path }) {
   const [finishDate, setFinishDate] = useState(null);
   const [itemsPerPage] = useState(7);
   const [currentPage, setCurrentPage] = useState(1);
+  const [name, setName] = useState('');
   const lastItemsPage = currentPage * itemsPerPage;
   const firstItemsPage = lastItemsPage - itemsPerPage;
   let URL = `http://api.football-data.org/v2/${path}/${id.id}/matches`;
@@ -39,7 +41,11 @@ function ItemMatches({ path }) {
         if (response.errorCode) {
           setErr(true);
           setData(response);
+          console.log(response);
         } else setMatches(response.matches);
+        if (path === 'competitions') {
+          setName(response.competition.name);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -48,7 +54,7 @@ function ItemMatches({ path }) {
         setLoading(false);
       });
   }, [startDate && finishDate]);
-
+  console.log(name);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   if (err) {
     return (
@@ -65,11 +71,11 @@ function ItemMatches({ path }) {
 
   return (
     <div>
-      {/* <MyBreadCrumb
+      <MyBreadCrumb
         id={id.id}
         path={path}
-        setErr={setErr}
-      /> */}
+        name={path === 'competitions' ? name : search.search}
+      />
       <DateFilter
         startDate={startDate}
         finishDate={finishDate}

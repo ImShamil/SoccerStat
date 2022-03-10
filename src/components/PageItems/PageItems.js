@@ -13,6 +13,7 @@ function PageItems({
   path,
 }) {
   let xs; let md;
+
   if (path === 'teams') {
     xs = 2;
     md = 5;
@@ -30,7 +31,7 @@ function PageItems({
       currentItemsPage.map((item) => (
         <Col>
           <Card>
-            <Link to={`/${path}/${item.id}`}>
+            <Link to={{ pathname: `/${path}/${item.id}?${item.name}` }}>
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
                 {path === 'teams'
