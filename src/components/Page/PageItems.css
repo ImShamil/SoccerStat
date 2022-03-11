@@ -1,0 +1,11 @@
+.card{
+    height: 200px;
+    justify-content: center;
+    text-align: center;
+  } 
+  .card-img , .card-img-bottom{
+    width:auto
+  }
+  .row{
+    margin-bottom: 50px;
+  }

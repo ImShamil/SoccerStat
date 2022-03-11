@@ -48,28 +48,30 @@ function Page({ path }) {
 
   return (
     <div>
-      <SearchFilter
-        data={data}
-        setCurrentPage={setCurrentPage}
-        setFilterList={setFilterList}
-        setNotEmpty={setNotEmpty}
-      />
-      {path === 'competitions' && !notEmpty
-        ? (
-          <div>
-            <AvailableCompetitionsButton
-              competitions={filterList}
-              setCompetitions={setFilterList}
-              setCurrentPage={setCurrentPage}
-            />
-            <AllCompetitionsButton
-              competitions={data}
-              setCompetitions={setFilterList}
-              setCurrentPage={setCurrentPage}
-            />
-          </div>
-        )
-        : null}
+      <div className="d-flex">
+        <SearchFilter
+          data={data}
+          setCurrentPage={setCurrentPage}
+          setFilterList={setFilterList}
+          setNotEmpty={setNotEmpty}
+        />
+        {path === 'competitions' && !notEmpty
+          ? (
+            <div>
+              <AvailableCompetitionsButton
+                competitions={filterList}
+                setCompetitions={setFilterList}
+                setCurrentPage={setCurrentPage}
+              />
+              <AllCompetitionsButton
+                competitions={data}
+                setCompetitions={setFilterList}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
+          )
+          : null}
+      </div>
       {!filterList.length
         ? <OoopsPage /> : (
           <PageItems

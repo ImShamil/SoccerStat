@@ -1,3 +1,4 @@
+import './SearchFilter.css';
 import React, { useState, useEffect } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 

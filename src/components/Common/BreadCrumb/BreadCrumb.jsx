@@ -13,7 +13,7 @@ function BreadCrumb({
           {path === 'teams' ? 'Команды' : 'Лиги'}
         </Link>
       </Breadcrumb.Item>
-      <Breadcrumb.Item>
+      <Breadcrumb.Item active>
         {name.replace('?', '').replaceAll('%20', ' ')}
       </Breadcrumb.Item>
     </Breadcrumb>
