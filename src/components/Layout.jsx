@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { Container, Nav } from 'react-bootstrap';
-import logo from '../logo.svg';
+import logo from '../img/logo.svg';
 
 function Layout() {
   return (

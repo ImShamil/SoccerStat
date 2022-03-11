@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 function AvailableCompetitionsButton({
   competitions,
   setCompetitions,
+  setCurrentPage,
 }) {
   const AVAILABLE_ID = [
     '2000',
@@ -26,6 +27,7 @@ function AvailableCompetitionsButton({
       (competition) => (filterSet.has(competition.id.toString())),
     );
     setCompetitions(avalilableList);
+    setCurrentPage(1);
   };
 
   return (

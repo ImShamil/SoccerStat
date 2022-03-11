@@ -4,14 +4,16 @@ import Button from 'react-bootstrap/Button';
 function AllCompetitionsButton({
   competitions,
   setCompetitions,
+  setCurrentPage,
 }) {
   const handleOnClick = () => {
     setCompetitions(competitions);
+    setCurrentPage(1);
   };
 
   return (
     <Button onClick={handleOnClick}>
-      Показать всё
+      Показать все лиги
     </Button>
   );
 }

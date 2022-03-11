@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PageItems from './PageItems';
 import SearchFilter from '../Common/SearchFilter/SearchFilter';
 import Paginator from '../Common/Paginator/Paginator';
-import AvailableCompetitionButton from './AvailableCompetitionButton';
+import AvailableCompetitionsButton from './AvailableCompetitionsButton';
 import ErrorPage from '../Info_pages/ErrorPage';
 import getPageList from '../../api/getPageList';
 import OoopsPage from '../Info_pages/OoopsPage';
-import AllCompetitionButton from './AllCompetitionButton';
+import AllCompetitionsButton from './AllCompetitionsButton';
 import Loader from '../Common/Loader/Loader';
 
 function Page({ path }) {
@@ -57,13 +57,15 @@ function Page({ path }) {
       {path === 'competitions' && !notEmpty
         ? (
           <div>
-            <AvailableCompetitionButton
+            <AvailableCompetitionsButton
               competitions={filterList}
               setCompetitions={setFilterList}
+              setCurrentPage={setCurrentPage}
             />
-            <AllCompetitionButton
+            <AllCompetitionsButton
               competitions={data}
               setCompetitions={setFilterList}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         )
