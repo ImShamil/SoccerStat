@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-function MyButtonAll({
+function AllCompetitionsButton({
   competitions,
   setCompetitions,
 }) {
@@ -15,4 +15,4 @@ function MyButtonAll({
     </Button>
   );
 }
-export default MyButtonAll;
+export default AllCompetitionsButton;

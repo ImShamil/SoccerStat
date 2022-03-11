@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-function AvailableCompetitionButton({
+function AvailableCompetitionsButton({
   competitions,
   setCompetitions,
 }) {
@@ -34,4 +34,4 @@ function AvailableCompetitionButton({
     </Button>
   );
 }
-export default AvailableCompetitionButton;
+export default AvailableCompetitionsButton;
