@@ -14,7 +14,7 @@ function Paginator({
 
   const pageNumbers = [...new Array(totalPages)].map((_, index) => {
     const pageNumber = index + 1;
-
+    console.log(currentPage);
     if (totalPages > 7) {
       // Номер текущей страницы
       const isPageNumberFirst = pageNumber === 1;
@@ -94,7 +94,13 @@ function Paginator({
 
       if (!isPageNumberOutOfRange) {
         isPageNumberOutOfRange = true;
-        return <Pagination.Ellipsis key={pageNumber} className="muted" />;
+        return (
+          <Pagination.Ellipsis
+            key={pageNumber}
+            className="muted"
+            disabled
+          />
+        );
       }
     } else {
       return (
