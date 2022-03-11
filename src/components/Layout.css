@@ -9,15 +9,13 @@
 .me-auto{
     border-left: 1px black solid;
 }
-.navbar-light .navbar-brand {
+.navbar-light .navbar-brand,.navbar-light .navbar-brand:hover, .navLink {
     color: white;
 }
-.navbar-light .navbar-brand:hover{
+
+/* .navLink{
     color: white;
-}
-.navLink{
-    color: white;
-}
+} */
 .navLink:hover, .active{
     color:#FFFF00;
 }
