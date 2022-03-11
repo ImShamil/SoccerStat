@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { format } from 'date-fns';
 import MatchesNotFound from '../Info_pages/MatchesNotFound';
 
-function MyTable({
+function MatchesList({
   matches,
   count,
   itemsPerPage,
@@ -80,4 +80,4 @@ function MyTable({
     </div>
   );
 }
-export default MyTable;
+export default MatchesList;
