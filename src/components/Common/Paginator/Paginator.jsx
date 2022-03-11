@@ -14,7 +14,6 @@ function Paginator({
 
   const pageNumbers = [...new Array(totalPages)].map((_, index) => {
     const pageNumber = index + 1;
-    console.log(currentPage);
     if (totalPages > 7) {
       // Номер текущей страницы
       const isPageNumberFirst = pageNumber === 1;
