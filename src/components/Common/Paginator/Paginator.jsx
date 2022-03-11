@@ -1,15 +1,14 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 
-function MyPagination({
+function Paginator({
   perPage,
   total,
   currentPage,
-  paginate,
+  setCurrentPage,
 }) {
   const totalPages = Math.ceil(total / perPage);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   let isPageNumberOutOfRange;
 
@@ -137,4 +136,4 @@ function MyPagination({
     </Pagination>
   );
 }
-export default MyPagination;
+export default Paginator;

@@ -1,36 +1,22 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
 import PageItems from './PageItems';
-import Searchbar from '../Common/Searchbar';
-import MyPagination from '../Common/MyPagination';
-import MyButton from './MyButton';
+import SearchFilter from '../Common/SearchFilter/SearchFilter';
+import Paginator from '../Common/Paginator/Paginator';
+import AvailableCompetitionButton from './AvailableCompetitionButton';
 import ErrorPage from '../Info_pages/ErrorPage';
 import getPageList from '../../api/getPageList';
 import OoopsPage from '../Info_pages/OoopsPage';
+import AllCompetitionButton from './AllCompetitionButton';
+import Loader from '../Common/Loader/Loader';
 
 function Page({ path }) {
-  const AVAILABLE_ID = [
-    '2000',
-    '2001',
-    '2002',
-    '2003',
-    '2013',
-    '2014',
-    '2015',
-    '2016',
-    '2017',
-    '2018',
-    '2019',
-    '2021',
-    '2152'];
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [filterList, setFilterList] = useState([]);
   const [err, setErr] = useState(false);
+  const [notEmpty, setNotEmpty] = useState(false);
+
   let itemsPerPage;
 
   useEffect(() => {
@@ -48,10 +34,6 @@ function Page({ path }) {
     itemsPerPage = 10;
   } else itemsPerPage = 9;
 
-  const lastItemsPage = currentPage * itemsPerPage;
-  const firstItemsPage = lastItemsPage - itemsPerPage;
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   if (err) {
     return (
       <ErrorPage data={data} />
@@ -60,47 +42,46 @@ function Page({ path }) {
 
   if (loading) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">
-          Loading...
-        </span>
-      </Spinner>
+      <Loader />
     );
   }
-  console.log(filterList.length);
 
   return (
     <div>
-      <Searchbar
+      <SearchFilter
         data={data}
         setCurrentPage={setCurrentPage}
         setFilterList={setFilterList}
+        setNotEmpty={setNotEmpty}
       />
-      {path === 'competitions'
+      {path === 'competitions' && !notEmpty
         ? (
-          <MyButton
-            competitions={data}
-            AVAILABLE_ID={AVAILABLE_ID}
-            setCompetitions={setData}
-          />
+          <div>
+            <AvailableCompetitionButton
+              competitions={filterList}
+              setCompetitions={setFilterList}
+            />
+            <AllCompetitionButton
+              competitions={data}
+              setCompetitions={setFilterList}
+            />
+          </div>
         )
         : null}
       {!filterList.length
         ? <OoopsPage /> : (
           <PageItems
             page={filterList}
-            firstItemsPage={firstItemsPage}
-            lastItemsPage={lastItemsPage}
             itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
             path={path}
           />
         )}
-
-      <MyPagination
+      <Paginator
         perPage={itemsPerPage}
         total={filterList.length}
         currentPage={currentPage}
-        paginate={paginate}
+        setCurrentPage={setCurrentPage}
       />
     </div>
 

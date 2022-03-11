@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
@@ -7,19 +5,22 @@ import { Row, Col } from 'react-bootstrap';
 
 function PageItems({
   page,
-  firstItemsPage,
-  lastItemsPage,
   itemsPerPage,
+  currentPage,
   path,
 }) {
-  let xs; let md;
+  let xs;
+  let md;
+
+  const lastItemsPage = currentPage * itemsPerPage;
+  const firstItemsPage = lastItemsPage - itemsPerPage;
 
   if (path === 'teams') {
-    xs = 2; // number of colums for <576px
-    md = 5; // number of colums for ≥768px
+    xs = 2; // число столбцов <576px
+    md = 5; // число столбцов for ≥768px
   } else {
-    xs = 3; // the same for competitions page
-    md = 3; // the same for competitions page
+    xs = 3; // тоже самое для страницы лиг
+    md = 3; // тоже самое для страницы лиг
   }
   const currentItemsPage = (page.slice(firstItemsPage, lastItemsPage)).length === 0
     ? page.slice(0, itemsPerPage)

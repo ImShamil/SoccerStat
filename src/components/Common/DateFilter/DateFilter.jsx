@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import 'react-datepicker/dist/react-datepicker.css';
 import React from 'react';
 import DatePicker from 'react-datepicker';

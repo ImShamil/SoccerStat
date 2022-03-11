@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-tabs */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 
@@ -13,7 +10,7 @@ function OoopsPage() {
       </p>
       <hr />
       <p className="mb-0">
-        Попробуйте поискать что-нибудь другое или перейдите на другую страницу 	&#128522;
+        Попробуйте поискать что-нибудь другое или перейдите на другую страницу.
       </p>
     </Alert>
   );

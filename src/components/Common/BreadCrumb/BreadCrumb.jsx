@@ -1,10 +1,8 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { Link } from 'react-router-dom';
 
-function MyBreadCrumb({
+function BreadCrumb({
   path,
   name,
 }) {
@@ -21,4 +19,4 @@ function MyBreadCrumb({
     </Breadcrumb>
   );
 }
-export default MyBreadCrumb;
+export default BreadCrumb;

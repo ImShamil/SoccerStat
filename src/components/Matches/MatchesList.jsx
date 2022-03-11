@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { format } from 'date-fns';
@@ -8,10 +6,11 @@ import MatchesNotFound from '../Info_pages/MatchesNotFound';
 function MyTable({
   matches,
   count,
-  firstItemsPage,
-  lastItemsPage,
   itemsPerPage,
+  currentPage,
 }) {
+  const lastItemsPage = currentPage * itemsPerPage;
+  const firstItemsPage = lastItemsPage - itemsPerPage;
   const currentMathesPage = (matches.slice(firstItemsPage, lastItemsPage)).length === 0
     ? matches.slice(0, itemsPerPage)
     : matches.slice(firstItemsPage, lastItemsPage);

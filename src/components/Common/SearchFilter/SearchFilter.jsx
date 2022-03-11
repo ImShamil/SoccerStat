@@ -1,12 +1,11 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 
-function Searchbar({
+function SearchFilter({
   data,
   setCurrentPage,
   setFilterList,
+  setNotEmpty,
 }) {
   const [value, setValue] = useState('');
 
@@ -21,6 +20,9 @@ function Searchbar({
 
   useEffect(() => {
     setFilterList(filterCompetition);
+    if (value) {
+      setNotEmpty(true);
+    } else { setNotEmpty(false); }
   }, [data, value]);
 
   return (
@@ -35,4 +37,4 @@ function Searchbar({
     </Form>
   );
 }
-export default Searchbar;
+export default SearchFilter;

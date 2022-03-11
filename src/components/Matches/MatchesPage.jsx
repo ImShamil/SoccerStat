@@ -1,16 +1,14 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
-import MyTable from './MyTable';
-import MyPagination from '../Common/MyPagination';
-import MyBreadCrumb from '../Common/MyBreadCrumb';
-import DateFilter from '../Common/DateFilter';
+import Loader from '../Common/Loader/Loader';
+import MatchesList from './MatchesList';
+import Paginator from '../Common/Paginator/Paginator';
+import BreadCrumb from '../Common/BreadCrumb/BreadCrumb';
+import DateFilter from '../Common/DateFilter/DateFilter';
 import ErrorPage from '../Info_pages/ErrorPage';
 import getPageData from '../../api/getMatchesList';
 
-function ItemMatches({ path }) {
+function MatchesPage({ path }) {
   const id = useParams();
   const search = useLocation();
   const [data, setData] = useState([]);
@@ -22,8 +20,6 @@ function ItemMatches({ path }) {
   const [itemsPerPage] = useState(7);
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState('');
-  const lastItemsPage = currentPage * itemsPerPage;
-  const firstItemsPage = lastItemsPage - itemsPerPage;
 
   useEffect(() => {
     getPageData(
@@ -39,7 +35,6 @@ function ItemMatches({ path }) {
     );
   }, [startDate && finishDate]);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   if (err) {
     return (
       <ErrorPage data={data} />
@@ -47,15 +42,13 @@ function ItemMatches({ path }) {
   }
   if (loading) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Loader />
     );
   }
 
   return (
     <div>
-      <MyBreadCrumb
+      <BreadCrumb
         id={id.id}
         path={path}
         name={path === 'competitions' ? name : search.search}
@@ -67,20 +60,20 @@ function ItemMatches({ path }) {
         setFinishDate={setFinishDate}
         setCurrentPage={setCurrentPage}
       />
-      <MyTable
+      <MatchesList
         matches={matches}
         count={matches.length}
-        firstItemsPage={firstItemsPage}
-        lastItemsPage={lastItemsPage}
         itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
       />
-      <MyPagination
+      <Paginator
         perPage={itemsPerPage}
         total={matches.length}
         currentPage={currentPage}
-        paginate={paginate}
+        setCurrentPage={setCurrentPage}
+
       />
     </div>
   );
 }
-export default ItemMatches;
+export default MatchesPage;

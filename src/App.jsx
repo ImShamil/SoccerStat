@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import './App.css';
 import React from 'react';
 import {
@@ -8,8 +7,8 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import Page from './components/PageItems/Page';
-import ItemMatches from './components/Matches/ItemMatches';
+import Page from './components/Page/Page';
+import MatchesPage from './components/Matches/MatchesPage';
 import Layout from './components/Layout';
 import OoopsPage from './components/Info_pages/OoopsPage';
 
@@ -20,9 +19,9 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Navigate to="competitions" />} />
           <Route path="competitions" element={<Page path="competitions" />} />
-          <Route path="competitions/:id" element={<ItemMatches path="competitions" />} />
+          <Route path="competitions/:id" element={<MatchesPage path="competitions" />} />
           <Route path="teams" element={<Page path="teams" />} />
-          <Route path="teams/:id" element={<ItemMatches path="teams" />} />
+          <Route path="teams/:id" element={<MatchesPage path="teams" />} />
           <Route path="*" element={<OoopsPage />} />
         </Route>
       </Routes>

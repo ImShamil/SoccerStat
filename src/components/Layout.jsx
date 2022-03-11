@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
@@ -18,6 +17,8 @@ function Layout() {
               className="d-inline-block align-top"
               alt="SoccerStatApp logo"
             />
+            {' '}
+            SoccerStat
           </Navbar.Brand>
 
           <Nav className="me-auto">
