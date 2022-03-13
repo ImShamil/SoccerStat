@@ -6,6 +6,16 @@
   .card-img , .card-img-bottom{
     width:auto
   }
-  .row{
+  .competitionContainer{
+    height: 690px;
     margin-bottom: 50px;
+  }
+  .teamContainer{
+    height: 450px;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 992px){
+    .teamContainer{
+      height: 1120px;
+    }
   }

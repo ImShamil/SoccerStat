@@ -1,0 +1,17 @@
+.dateFilterContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin-bottom: 50px;
+}
+.datePickerContainer{
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+.react-datepicker-wrapper{
+    margin-left: 10px;
+}
+.react-datepicker-wrapper input{
+    width: 110px;
+}

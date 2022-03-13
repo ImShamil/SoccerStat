@@ -1,3 +1,4 @@
+import './DateFilter.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import React from 'react';
 import DatePicker from 'react-datepicker';
@@ -29,28 +30,32 @@ function DateFilter({
   }
 
   return (
-    <div style={{ display: 'flex' }}>
-
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => handleOnchangeStart(date)}
-        locale={ru}
-        dateFormat="P"
-        placeholderText="с ДД.ММ.ГГГГ"
-        isClearable
-      />
-
-      <DatePicker
-        selected={finishDate}
-        onChange={(date) => handleOnchangeFinish(date)}
-        locale={ru}
-        dateFormat="P"
-        minDate={startDate}
-        maxDate={addMonths(new Date(), 12)}
-        showDisabledMonthNavigation
-        placeholderText="по ДД.ММ.ГГГГ"
-        isClearable
-      />
+    <div className="dateFilterContainer">
+      <div className="datePickerContainer">
+        С
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => handleOnchangeStart(date)}
+          locale={ru}
+          dateFormat="P"
+          placeholderText="ДД.ММ.ГГГГ"
+          isClearable
+        />
+      </div>
+      <div className="datePickerContainer">
+        По
+        <DatePicker
+          selected={finishDate}
+          onChange={(date) => handleOnchangeFinish(date)}
+          locale={ru}
+          dateFormat="P"
+          minDate={startDate}
+          maxDate={addMonths(new Date(), 12)}
+          showDisabledMonthNavigation
+          placeholderText="ДД.ММ.ГГГГ"
+          isClearable
+        />
+      </div>
     </div>
   );
 }

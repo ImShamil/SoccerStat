@@ -11,30 +11,34 @@ function PageItems({
   currentPage,
   path,
 }) {
-  let xs;
+  let sm;
   let md;
+  let lg;
 
   const lastItemsPage = currentPage * itemsPerPage;
   const firstItemsPage = lastItemsPage - itemsPerPage;
 
   if (path === 'teams') {
-    xs = 2; // число столбцов <576px
-    md = 5; // число столбцов for ≥768px
+    sm = 2; // число столбцов для страницы команд ≥576px
+    md = 2; // ≥768px
+    lg = 5;//  ≥992px
   } else {
-    xs = 3; // тоже самое для страницы лиг
-    md = 3; // тоже самое для страницы лиг
+    sm = 3; // тоже самое для страницы лиг
+    md = 3;
+    lg = 3;
   }
   const currentItemsPage = (page.slice(firstItemsPage, lastItemsPage)).length === 0
     ? page.slice(0, itemsPerPage)
     : page.slice(firstItemsPage, lastItemsPage);
 
   return (
-    <Row xs={xs} md={md} className="g-4">
-      {
+    <div className={(path === 'competitions') ? 'competitionContainer' : 'teamContainer'}>
+      <Row sm={sm} md={md} lg={lg} className="g-4">
+        {
       currentItemsPage.map((item) => (
         <Col>
           <Card>
-            <Link to={{ pathname: `/${path}/${item.id}?${item.name}` }}>
+            <Link to={`/${path}/${item.id}?${item.name}`}>
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
                 {path === 'teams'
@@ -51,7 +55,8 @@ function PageItems({
         </Col>
       ))
     }
-    </Row>
+      </Row>
+    </div>
 
   );
 }

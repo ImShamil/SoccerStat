@@ -1,0 +1,10 @@
+.loaderContainer{
+    display: flex;
+    height: 50rem;
+    align-items: center;
+    justify-content: center;
+}
+.spinner-border{
+    width: 100px;
+    height: 100px;
+}

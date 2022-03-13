@@ -17,7 +17,7 @@ function MatchesPage({ path }) {
   const [err, setErr] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [finishDate, setFinishDate] = useState(null);
-  const [itemsPerPage] = useState(7);
+  const [itemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState('');
 

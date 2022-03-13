@@ -1,3 +1,4 @@
+import './MatchesList.css';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { format } from 'date-fns';
@@ -55,7 +56,7 @@ function MatchesList({
   }
 
   return (
-    <div>
+    <div className="MatchListContainer">
       <h2>Матчи</h2>
       <Table striped bordered hover>
         <tbody>

@@ -1,12 +1,13 @@
+import './Page.css';
 import React, { useEffect, useState } from 'react';
 import PageItems from './PageItems';
 import SearchFilter from '../Common/SearchFilter/SearchFilter';
 import Paginator from '../Common/Paginator/Paginator';
-import AvailableCompetitionsButton from './AvailableCompetitionsButton';
+import AvailableCompetitionsButton from './Buttons/AvailableCompetitionsButton';
 import ErrorPage from '../Info_pages/ErrorPage';
 import getPageList from '../../api/getPageList';
 import OoopsPage from '../Info_pages/OoopsPage';
-import AllCompetitionsButton from './AllCompetitionsButton';
+import AllCompetitionsButton from './Buttons/AllCompetitionsButton';
 import Loader from '../Common/Loader/Loader';
 
 function Page({ path }) {
@@ -48,7 +49,7 @@ function Page({ path }) {
 
   return (
     <div>
-      <div className="d-flex">
+      <div className="filterBar">
         <SearchFilter
           data={data}
           setCurrentPage={setCurrentPage}
@@ -57,7 +58,7 @@ function Page({ path }) {
         />
         {path === 'competitions' && !notEmpty
           ? (
-            <div>
+            <div className="buttonGroup">
               <AvailableCompetitionsButton
                 competitions={filterList}
                 setCompetitions={setFilterList}

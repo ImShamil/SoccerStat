@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { format } from 'date-fns';
 
 export default function getMatchesList(
