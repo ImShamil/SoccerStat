@@ -2,6 +2,10 @@
     color:#3f9b0b;
     border-color: #3f9b0b;
 }
+.page-link:hover{
+    color:#3f9b0b;
+    border-color: #3f9b0b;
+}
 .page-item.active .page-link{
     border-color: #3f9b0b;
     background-color:#3f9b0b;
