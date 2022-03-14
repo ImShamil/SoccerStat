@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
