@@ -4,6 +4,40 @@ import Table from 'react-bootstrap/Table';
 import { format } from 'date-fns';
 import MatchesNotFound from '../Info_pages/MatchesNotFound';
 
+const getStatus = (item) => {
+  let status;
+  switch (item) {
+    case 'SCHEDULED':
+      status = 'Запланирован';
+      break;
+    case 'LIVE':
+      status = 'В прямом эфире';
+      break;
+    case 'IN_PLAY':
+      status = 'В игре';
+      break;
+    case 'PAUSED':
+      status = 'Пауза';
+      break;
+    case 'FINISHED':
+      status = 'Завершен';
+      break;
+    case 'POSTPONED':
+      status = 'Отложен';
+      break;
+    case 'SUSPENDED':
+      status = 'Приостановлен';
+      break;
+    case 'CANCELED':
+      status = 'Отменен';
+      break;
+    default:
+      status = 'Ошибка';
+      break;
+  }
+  return status;
+};
+
 function MatchesList({
   matches,
   count,
@@ -16,39 +50,6 @@ function MatchesList({
     ? matches.slice(0, itemsPerPage)
     : matches.slice(firstItemsPage, lastItemsPage);
 
-  const getStatus = (item) => {
-    let status;
-    switch (item) {
-      case 'SCHEDULED':
-        status = 'Запланирован';
-        break;
-      case 'LIVE':
-        status = 'В прямом эфире';
-        break;
-      case 'IN_PLAY':
-        status = 'В игре';
-        break;
-      case 'PAUSED':
-        status = 'Пауза';
-        break;
-      case 'FINISHED':
-        status = 'Завершен';
-        break;
-      case 'POSTPONED':
-        status = 'Отложен';
-        break;
-      case 'SUSPENDED':
-        status = 'Приостановлен';
-        break;
-      case 'CANCELED':
-        status = 'Отменен';
-        break;
-      default:
-        status = 'Ошибка';
-        break;
-    }
-    return status;
-  };
   if (!count) {
     return (
       <MatchesNotFound />
