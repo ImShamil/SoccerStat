@@ -1,7 +1,6 @@
 .footer{
     background-color:  #3f9b0b;
 }
-
 .dataFootbalLogo{
     width: 100px;
     height: 50px;
@@ -12,21 +11,15 @@
     align-items: center;
     justify-content: space-between;
 }
-
-
-@media (min-width: 768px){
-    .footer .navbar-expand-lg .navbar-nav {
-        flex-direction: row;
-    }
-    .footer .navbar-expand-lg .navbar-nav .nav-link {
-        padding-right: .5rem;
-        padding-left: .5rem;
-    }
-    
+.navbar-expand-lg {
+    justify-content: space-between
 }
-@media (min-width: 992px){
-    .navbar-expand-lg {
-        justify-content: space-between
-    }
+.footer .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
 }
 
+@media (max-width: 320px){
+    .dataFootbalLogo{
+        height: 40px;
+    }
+}

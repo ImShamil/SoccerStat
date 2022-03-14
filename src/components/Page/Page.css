@@ -1,6 +1,6 @@
 .filterBar{
     display: flex;
-    height: 40px;
+    height: auto;
     margin-bottom: 50px;
     margin-top:50px;
 }
@@ -11,4 +11,21 @@
     display: flex;
     width: 400px;
     justify-content: space-between;
+}
+@media (max-width: 568px){
+    .filterBar{
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    .me-2{
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+    .d-flex{
+        margin-right: 0px;
+    }
+    .buttonGroup{
+        width: 288px;
+        flex-direction: column;
+    }
 }

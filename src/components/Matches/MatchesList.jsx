@@ -56,13 +56,13 @@ function MatchesList({
   }
 
   return (
-    <div className="MatchListContainer">
+    <div className="matchListContainer">
       <h2>Матчи</h2>
-      <Table striped bordered hover>
+      <Table size="sm" striped bordered hover>
         <tbody>
           {currentMathesPage.map((item) => (
             <tr>
-              <td>{format(new Date(item.utcDate), 'dd.MM.yyyy')}</td>
+              <td>{format(new Date(item.utcDate), 'dd.MM.yy')}</td>
               <td>{format(new Date(item.utcDate), 'HH:mm')}</td>
               <td>
                 {' '}

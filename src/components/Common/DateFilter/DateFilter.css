@@ -1,7 +1,7 @@
 .dateFilterContainer{
     display: flex;
     justify-content: space-between;
-    width: 300px;
+    width: 295px;
     margin-bottom: 50px;
 }
 .datePickerContainer{

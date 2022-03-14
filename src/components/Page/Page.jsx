@@ -11,14 +11,13 @@ import AllCompetitionsButton from './Buttons/AllCompetitionsButton';
 import Loader from '../Common/Loader/Loader';
 
 function Page({ path }) {
+  const itemsPerPage = 12;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [filterList, setFilterList] = useState([]);
   const [err, setErr] = useState(false);
   const [notEmpty, setNotEmpty] = useState(false);
-
-  let itemsPerPage;
 
   useEffect(() => {
     getPageList(
@@ -30,10 +29,6 @@ function Page({ path }) {
   }, [path]);
 
   useEffect(() => { setCurrentPage(1); }, [path]);
-
-  if (path === 'teams') {
-    itemsPerPage = 10;
-  } else itemsPerPage = 9;
 
   if (err) {
     return (

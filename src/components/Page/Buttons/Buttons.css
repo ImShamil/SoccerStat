@@ -3,15 +3,15 @@
     border-color: #3f9b0b;
 }
 
-.btn-success:hover{
+.btn-success:focus,.btn-success:hover{
     background-color:#3f9b0b;
     border-color: #3f9b0b;
     color:#FFFF00;
 }
 
-.btn-success:focus{
-    background-color:#3f9b0b;
-    border-color: #3f9b0b;
-    color:#FFFF00;
-}
-
+@media(max-width:568px){
+    .btn{
+        font-size:1rem;
+        margin-bottom: 25px;
+    }
+  }

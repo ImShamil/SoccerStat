@@ -13,7 +13,7 @@
     color:#FFFF00;
 }
 
-@media (min-width: 768px){
+@media (max-width: 768px){
     .navbar-expand-lg .navbar-nav {
         flex-direction: row;
     }
@@ -22,3 +22,4 @@
         padding-left: .5rem;
     }
 }
+

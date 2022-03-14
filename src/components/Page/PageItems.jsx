@@ -5,35 +5,27 @@ import Card from 'react-bootstrap/Card';
 import { Row, Col } from 'react-bootstrap';
 import noImageAvailable from '../../img/noImageAvailable.svg';
 
+const XS = 2; // число столбцов для страницы команд <576px
+const SM = 3; // ≥576px
+const MD = 3; // ≥768px
+const LG = 4;//  ≥992px
+
 function PageItems({
   page,
   itemsPerPage,
   currentPage,
   path,
 }) {
-  let sm;
-  let md;
-  let lg;
-
   const lastItemsPage = currentPage * itemsPerPage;
   const firstItemsPage = lastItemsPage - itemsPerPage;
 
-  if (path === 'teams') {
-    sm = 2; // число столбцов для страницы команд ≥576px
-    md = 2; // ≥768px
-    lg = 5;//  ≥992px
-  } else {
-    sm = 3; // тоже самое для страницы лиг
-    md = 3;
-    lg = 3;
-  }
   const currentItemsPage = (page.slice(firstItemsPage, lastItemsPage)).length === 0
     ? page.slice(0, itemsPerPage)
     : page.slice(firstItemsPage, lastItemsPage);
 
   return (
-    <div className={(path === 'competitions') ? 'competitionContainer' : 'teamContainer'}>
-      <Row sm={sm} md={md} lg={lg} className="g-4">
+    <div className="commonContainer">
+      <Row xs={XS} sm={SM} md={MD} lg={LG} className="g-4">
         {
       currentItemsPage.map((item) => (
         <Col>
@@ -42,12 +34,12 @@ function PageItems({
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
                 {path === 'teams'
-                  ? <Card.Img variant="bottom" src={item.crestUrl} height="100px" />
+                  ? <Card.Img variant="bottom" src={item.crestUrl} className="teamImage" />
                   : (
-                    <Card.Text>
+                    <div>
                       <Card.Text>{item.area.name}</Card.Text>
                       <Card.Img variant="bottom" src={((item.area.ensignUrl) || (item.emblemUrl) || noImageAvailable)} height="100px" />
-                    </Card.Text>
+                    </div>
                   )}
               </Card.Body>
             </Link>

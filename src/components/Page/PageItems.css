@@ -1,21 +1,51 @@
 .card{
-    height: 200px;
-    justify-content: center;
-    text-align: center;
-  } 
+  height: 200px;
+  justify-content: center;
+  text-align: center;
+} 
+.card-img , .card-img-bottom{
+  width:auto;
+  height: 100px;
+}
+.teamImage{
+  height: 130px;
+}
+.commonContainer{
+  height: 690px;
+  margin-bottom: 50px;
+}
+.card-body{
+  height: 200px;
+}
+@media (max-width: 1024px){
+  
   .card-img , .card-img-bottom{
-    width:auto
+    height: 80px;
   }
-  .competitionContainer{
-    height: 690px;
-    margin-bottom: 50px;
+  .card-body{
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
-  .teamContainer{
-    height: 450px;
-    margin-bottom: 50px;
+ .teamImage{
+    height: 130px;
   }
-  @media (max-width: 992px){
-    .teamContainer{
-      height: 1120px;
-    }
+}
+@media (max-width: 768px){
+  .commonContainer{
+    height: 900px;
   }
+}
+@media(max-width:568px){
+  .commonContainer{
+    height: 1350px;
+  }
+  .card-img , .card-img-bottom{
+    height: 60px;
+  }
+  .teamImage{
+    height: 105px;
+  }
+} 
