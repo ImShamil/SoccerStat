@@ -1,13 +1,13 @@
 import './Page.css';
 import React, { useEffect, useState } from 'react';
+import getPageList from '../../api/getPageList';
 import PageItems from './PageItems';
 import SearchFilter from '../Common/SearchFilter/SearchFilter';
 import Paginator from '../Common/Paginator/Paginator';
-import AvailableCompetitionsButton from './Buttons/AvailableCompetitionsButton';
 import ErrorPage from '../Info_pages/ErrorPage';
-import getPageList from '../../api/getPageList';
 import OoopsPage from '../Info_pages/OoopsPage';
 import AllCompetitionsButton from './Buttons/AllCompetitionsButton';
+import AvailableCompetitionsButton from './Buttons/AvailableCompetitionsButton';
 import Loader from '../Common/Loader/Loader';
 
 function Page({ path }) {

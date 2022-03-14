@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import getPageData from '../../api/getMatchesList';
 import Loader from '../Common/Loader/Loader';
-import MatchesList from './MatchesList';
 import Paginator from '../Common/Paginator/Paginator';
 import BreadCrumb from '../Common/BreadCrumb/BreadCrumb';
 import DateFilter from '../Common/DateFilter/DateFilter';
+import MatchesList from './MatchesList';
 import ErrorPage from '../Info_pages/ErrorPage';
-import getPageData from '../../api/getMatchesList';
 
 function MatchesPage({ path }) {
   const id = useParams();
