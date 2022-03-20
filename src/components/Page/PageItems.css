@@ -18,7 +18,6 @@
   height: 200px;
 }
 @media (max-width: 1024px){
-  
   .card-img , .card-img-bottom{
     height: 80px;
   }

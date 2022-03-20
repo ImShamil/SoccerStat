@@ -11,13 +11,13 @@ import AvailableCompetitionsButton from './Buttons/AvailableCompetitionsButton';
 import Loader from '../Common/Loader/Loader';
 
 function Page({ path }) {
-  const itemsPerPage = 12;
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filterList, setFilterList] = useState([]);
-  const [err, setErr] = useState(false);
-  const [notEmpty, setNotEmpty] = useState(false);
+  const itemsPerPage = 12;// кол-во элементов на странице
+  const [data, setData] = useState([]);// исходные данные
+  const [loading, setLoading] = useState(false);// состояние загрузки
+  const [currentPage, setCurrentPage] = useState(1);// номер текущей страницы
+  const [filterList, setFilterList] = useState([]);// отфильтрованный список
+  const [err, setErr] = useState(false);// флаг ошибки
+  const [notEmpty, setNotEmpty] = useState(false);// флаг строки поиска
 
   useEffect(() => {
     getPageList(

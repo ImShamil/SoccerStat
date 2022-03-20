@@ -3,9 +3,13 @@
     height: 900px;
 }
 
+@media (max-width: 768px){
+    .body{
+        height: 1200px;
+    }
+}
 @media (max-width: 568px){
     .body{
         height: 1800px;
     }
 }    
-
