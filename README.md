@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Required API-token from https://www.football-data.org/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
